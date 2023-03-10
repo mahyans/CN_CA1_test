@@ -1,0 +1,103 @@
+[Thu Mar 31 03:35:40 2022] Server response (fd = 5) was: 250: log.txt deleted.
+[Thu Mar 31 03:35:49 2022] Client (fd = 5) requested: dele
+[Thu Mar 31 03:35:49 2022] Server response (fd = 5) was: 550: File unavailable.
+[Thu Mar 31 03:37:40 2022] Client on fd 5 disconnected
+[Thu Mar 31 03:37:42 2022] Server is offline.
+[Thu Mar 31 03:37:48 2022] Server is now online.
+[Thu Mar 31 03:37:50 2022] new client connected with fd 5
+[Thu Mar 31 03:37:55 2022] Client (fd = 5) requested: user
+[Thu Mar 31 03:37:55 2022] Server response (fd = 5) was: 331: User name ok, need password.
+[Thu Mar 31 03:37:56 2022] Client (fd = 5) requested: pass
+[Thu Mar 31 03:37:56 2022] Server response (fd = 5) was: 230: User logged in, proceed. Log out if appropriate.
+[Thu Mar 31 03:38:05 2022] Client (fd = 5) requested: retr
+[Thu Mar 31 03:38:05 2022] Server response (fd = 5) was: 425: Can't open data connection.
+[Thu Mar 31 03:38:32 2022] Client on fd 5 disconnected
+[Thu Mar 31 03:38:34 2022] Server is offline.
+[Thu Mar 31 03:39:16 2022] Server is now online.
+[Thu Mar 31 03:39:19 2022] new client connected with fd 5
+[Thu Mar 31 03:39:21 2022] Client (fd = 5) requested: user
+[Thu Mar 31 03:39:21 2022] Server response (fd = 5) was: 331: User name ok, need password.
+[Thu Mar 31 03:39:23 2022] Client (fd = 5) requested: pass
+[Thu Mar 31 03:39:23 2022] Server response (fd = 5) was: 230: User logged in, proceed. Log out if appropriate.
+[Thu Mar 31 03:39:26 2022] Client (fd = 5) requested: dele
+[Thu Mar 31 03:39:26 2022] Server response (fd = 5) was: 550: File unavailable.
+[Thu Mar 31 03:39:28 2022] Client (fd = 5) requested: quit
+[Thu Mar 31 03:39:28 2022] Server response (fd = 5) was: 221: Successful Quit.
+[Thu Mar 31 03:39:30 2022] Client (fd = 5) requested: user
+[Thu Mar 31 03:39:30 2022] Server response (fd = 5) was: 331: User name ok, need password.
+[Thu Mar 31 03:39:32 2022] Client (fd = 5) requested: pass
+[Thu Mar 31 03:39:32 2022] Server response (fd = 5) was: 230: User logged in, proceed. Log out if appropriate.
+[Thu Mar 31 03:39:34 2022] Client (fd = 5) requested: dele
+[Thu Mar 31 03:39:34 2022] Server response (fd = 5) was: 550: File unavailable.
+[Thu Mar 31 03:39:38 2022] Client (fd = 5) requested: dele
+[Thu Mar 31 03:39:38 2022] Server response (fd = 5) was: 250: testt deleted.
+[Thu Mar 31 03:39:43 2022] Client on fd 5 disconnected
+[Thu Mar 31 03:39:44 2022] Server is offline.
+[Thu Mar  9 13:02:15 2023] Server is now online.
+[Thu Mar  9 13:02:21 2023] new client connected with fd 5
+[Thu Mar  9 13:02:32 2023] Client (fd = 5) requested: hi
+[Thu Mar  9 13:02:32 2023] Server response (fd = 5) was: 332: Need account for login.
+[Thu Mar  9 13:02:43 2023] Client (fd = 5) requested: login
+[Thu Mar  9 13:02:43 2023] Server response (fd = 5) was: 332: Need account for login.
+[Thu Mar  9 13:02:56 2023] Client (fd = 5) requested: signup
+[Thu Mar  9 13:02:56 2023] Server response (fd = 5) was: 332: Need account for login.
+[Thu Mar  9 15:09:43 2023] Client on fd 5 disconnected
+[Thu Mar  9 15:09:46 2023] Server is offline.
+[Thu Mar  9 15:18:09 2023] Server is now online.
+[Thu Mar  9 15:22:37 2023] Server is offline.
+[Thu Mar  9 15:22:49 2023] Server is now online.
+[Thu Mar  9 15:22:56 2023] Server is offline.
+[Thu Mar  9 15:31:26 2023] Server is now online.
+[Thu Mar  9 15:33:06 2023] Server is offline.
+[Thu Mar  9 15:33:59 2023] Server is now online.
+[Thu Mar  9 15:47:03 2023] Server is offline.
+[Thu Mar  9 15:48:42 2023] Server is now online.
+[Thu Mar  9 15:48:47 2023] Server is offline.
+[Thu Mar  9 15:49:41 2023] Server is now online.
+[Thu Mar  9 15:54:26 2023] Server is offline.
+[Thu Mar  9 16:00:49 2023] Server is now online.
+[Thu Mar  9 16:59:05 2023] Server is offline.
+[Thu Mar  9 17:09:53 2023] Server is now online.
+[Thu Mar  9 17:11:37 2023] Server is offline.
+[Thu Mar  9 17:11:43 2023] Server is now online.
+[Thu Mar  9 17:17:35 2023] Server is offline.
+[Thu Mar  9 17:17:43 2023] Server is now online.
+[Thu Mar  9 17:26:56 2023] Server is offline.
+[Thu Mar  9 17:26:57 2023] Server is now online.
+[Thu Mar  9 17:26:59 2023] Server is offline.
+[Thu Mar  9 17:27:03 2023] Server is now online.
+[Thu Mar  9 17:29:43 2023] Server is offline.
+[Thu Mar  9 17:29:47 2023] Server is now online.
+[Thu Mar  9 17:42:04 2023] Server is offline.
+[Thu Mar  9 17:42:11 2023] Server is now online.
+[Thu Mar  9 17:43:09 2023] Server is offline.
+[Thu Mar  9 17:43:14 2023] Server is now online.
+[Thu Mar  9 17:44:20 2023] Server is offline.
+[Thu Mar  9 17:44:21 2023] Server is now online.
+[Thu Mar  9 17:44:37 2023] Server is offline.
+[Thu Mar  9 17:44:38 2023] Server is now online.
+[Thu Mar  9 17:44:41 2023] Server is offline.
+[Thu Mar  9 17:44:55 2023] Server is now online.
+[Thu Mar  9 17:45:37 2023] Server is offline.
+[Thu Mar  9 17:45:40 2023] Server is now online.
+[Thu Mar  9 17:46:54 2023] Server is offline.
+[Thu Mar  9 17:46:58 2023] Server is now online.
+[Thu Mar  9 17:47:57 2023] Server is offline.
+[Thu Mar  9 17:47:58 2023] Server is now online.
+[Thu Mar  9 17:48:58 2023] Server is offline.
+[Thu Mar  9 17:49:04 2023] Server is now online.
+[Thu Mar  9 17:50:18 2023] Server is offline.
+[Thu Mar  9 17:50:20 2023] Server is now online.
+[Thu Mar  9 17:53:12 2023] Server is offline.
+[Thu Mar  9 17:53:13 2023] Server is now online.
+[Thu Mar  9 17:54:09 2023] Server is offline.
+[Thu Mar  9 17:54:10 2023] Server is now online.
+[Thu Mar  9 18:00:13 2023] Server is offline.
+[Thu Mar  9 18:00:14 2023] Server is now online.
+[Thu Mar  9 18:00:47 2023] Server is offline.
+[Thu Mar  9 18:00:48 2023] Server is now online.
+[Thu Mar  9 18:04:28 2023] Server is offline.
+[Thu Mar  9 18:04:29 2023] Server is now online.
+[Thu Mar  9 18:06:25 2023] Server is offline.
+[Thu Mar  9 18:08:27 2023] Server is now online.
+[Thu Mar  9 18:09:53 2023] Server is offline.
