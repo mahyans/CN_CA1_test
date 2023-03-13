@@ -8,13 +8,15 @@
 #define NOT_FULL 0;
 
 class Room {
-    //static int count;
+    static int count;
     public:
-        Room(std::string number, int price, int maxCapacity);
+        Room(std::string number, int price, int maxCapacity, int capacity);
         void printRoom();
-        void addReservation(Reservation newRsv);
-        bool hasConflict(Reservation rsv);
+        void addReservation(Reservation* newRsv);
+        bool hasConflict(Reservation* rsv);
         int getCapacity(){return capacity;};
+        std::string toString();
+        std::string toStringAdmin();
     private:
         int status, price, maxCapacity, capacity;
         std::string number;

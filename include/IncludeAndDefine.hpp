@@ -12,6 +12,8 @@
 #include <sys/time.h>
 #include <dirent.h>
 #include <cstdio>
+#include <iostream>
+#include <bits/stdc++.h>
 
 #define SUCCESSFUL_ADD "104: Successfully added."
 #define SUCCESSFUL_MODIFY "105: Successfully modefied."
@@ -34,7 +36,7 @@
 #define INVALID_USERNAME_PASS "430: Invalid username or password."
 #define USER_ALREADY_EXIST "451: User already existed!"
 #define BAD_COMMANDS "503: Bad sequence of commands."
-
+#define BAD_ARGUMENT "500: BAD arguments."
 #define SIGN_IN_COMMAND "signin"
 #define SET_TIME_COMMAND "setTime"
 #define PASS_DAY_COMMAND "passDay"
@@ -46,8 +48,20 @@
 #define BOOK_COMMAND "book"
 #define ADD_COMMAND "add"
 #define MODIFY_COMMAND "modify"
+#define USER_DATA "userData"
+#define VIEW_USER_INFO "1"
+#define VIEW_ALL_USERS "2"
+#define VIEW_ROOMS_INFO "3"
+#define BOOKING "4"
+#define CANCELING "5"
+#define PASSDAY "6"
+#define EDIT_INFO "7"
+#define LEAVING_ROOM "8"
+#define VIEW_ALL_ROOMS "9"
+#define LOGOUT "0"
 
 
+#define MAIN_PAGE "1. View user information\n2. View all users\n3. View rooms information\n4. Booking\n5. Canceling\n6. Pass day\n7.Edit information\n8.Leaving room\n9. Rooms\n0. Logout"
 #define BUFFER_SIZE 1024
 #define LOG_FILE_NAME "/configuration/log.txt"
 #define SUCCESSFUL_QUIT "221: Successful Quit."

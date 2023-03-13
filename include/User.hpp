@@ -6,11 +6,12 @@
 class User {
     static int count;
     public:
-        User(std::string username, std::string pass, std::string isAdmin);
-        User();
-        string toString();
+        User(std::string username, std::string pass);
+        User(std::string username, std::string pass, std::string purse, std::string phone, std::string address);
+        std::string toString();
         bool isValid(std::string username_);
         bool fdMatches(int fd);
+        bool idMatches(int id);
         void updateFd(int fd);
         bool login(std::string pass_);
         bool isLoggedIn();

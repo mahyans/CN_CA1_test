@@ -5,16 +5,20 @@
 #include "User.hpp"
 #include "Room.hpp"
 #include "Parser.hpp"
+#include <iostream>
+#include <string>
+#include "Date.hpp"
 
 class Server {
 public:
     Server(std::map<std::string, std::vector<std::string>> inputs);
     void printServer();
     int acceptClient(int port);
-    std::string handleCommand(std::string command, std::string argument, int userFd, int userDataFd);
+    std::string handleCommand(std::string command, std::string argument, int userFd);
     void run();
-
+    void setDate(std::string date);
 private:
+    Date systemDate = Date("0-0-0");
     std::string curr_log, log_path;
     std::string hostName;
     int cmdChannelPort, dataChannelPort, serverDataFd, serverCmdFd;
@@ -22,11 +26,10 @@ private:
     std::vector<Room> rooms;
     std::vector <std::string> adminFiles;
     std::map<int, std::string> fdLastRequest, fdLoggedInUser; 
-
-    std::string handleSignIn(string username , string password , int fd);
-
+    User* loginedUser;
 
     User* findUserByFd(int userFd); 
+    User* findUserById(int userId);
     User* findUserByName(std::string username_);
     bool loginUser(std::string curr_user, int fd, std::string lastUser);
     bool hasFileAccess(User* currUser, std::string file);
