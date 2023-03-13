@@ -21,7 +21,7 @@ string User::toString() {
 }
 
 bool User::isValid(string username_) {
-    return (username_ == username);
+    return (uFsername_ == username);
 }
 
 bool User::fdMatches(int fd){

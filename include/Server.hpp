@@ -23,6 +23,9 @@ private:
     std::vector <std::string> adminFiles;
     std::map<int, std::string> fdLastRequest, fdLoggedInUser; 
 
+    std::string handleSignIn(string username , string password , int fd);
+
+
     User* findUserByFd(int userFd); 
     User* findUserByName(std::string username_);
     bool loginUser(std::string curr_user, int fd, std::string lastUser);

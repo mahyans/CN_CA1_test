@@ -35,6 +35,19 @@
 #define USER_ALREADY_EXIST "451: User already existed!"
 #define BAD_COMMANDS "503: Bad sequence of commands."
 
+#define SIGN_IN_COMMAND "signin"
+#define SET_TIME_COMMAND "setTime"
+#define PASS_DAY_COMMAND "passDay"
+#define ROOM_COMMAND "room"
+#define CAPACITY_COMMAND "capacity"
+#define REMOVE_COMMAND "remove"
+#define SIGN_UP_COMMAND "signup"
+#define CANCLE_COMMAND "cancle"
+#define BOOK_COMMAND "book"
+#define ADD_COMMAND "add"
+#define MODIFY_COMMAND "modify"
+
+
 #define BUFFER_SIZE 1024
 #define LOG_FILE_NAME "/configuration/log.txt"
 #define SUCCESSFUL_QUIT "221: Successful Quit."

@@ -43,9 +43,10 @@ string Server::handleHelp() {
     return help;
 }
 
-
-
-
+/*
+find_room_by_id
+bool find_date_confilict(start,end,<room>)
+*/
 void Server::sendData(string file, int dataFd){
     send(dataFd, file.c_str(), strlen(file.c_str()), 0);
 }
@@ -121,54 +122,111 @@ bool Server::loginUser(string password, int fd, string lastUser) {
     return false;
 }
 
+string Server :: handleSignIn(string username , string password , int fd)
+{
+    handleUser(fd,username);
+    handlePass(fd,password);
+}
+/*
+string Server :: handleSignUp()
+{
 
+}
+string Server :: handleSetTime()
+{
 
+}
+string Server :: handlePassDay()
+{
+
+}
+string Server :: handleRoom()
+{
+
+}
+string Server :: handleCapacity()
+{
+
+}
+string Server :: handleRemove()
+{
+
+}
+string Server :: handleCancle()
+{
+
+}
+string Server :: handleBook()
+{
+
+}
+string Server :: handleAdd()
+{
+
+}
+string Server :: handleModify()
+{
+
+}
+*/
 string Server::handleCommand(string command, string argument, int userFd, int userDataFd) {
     curr_log += "Client (fd = " + to_string(userFd) + ") requested: " + command;
     writeLog();
 
-    string argument1, argument2;
+    string  argument1, argument2, argument3 , argument4;
 
-    if(command == HELP_COMMAND) 
-        return handleHelp();
-
-    if (command == DELE_COMMAND || command == RENAME_COMMAND) {
+    if (command == SIGN_IN_COMMAND | command == CANCLE_COMMAND) 
+    {
         stringstream ss(argument);
-        getline(ss, argument1, ' ');
-        getline(ss, argument2, '\n');
+        getline(ss, argument1 , ' ');
+        getline(ss, argument2 , '\n');
     }
-    else
-        argument1 = argument;
+    else if(command == BOOK_COMMAND)
+    {
+        stringstream ss(argument);
+        getline(ss, argument1 , ' ');
+        getline(ss, argument2 , ' ');
+        getline(ss, argument3 , ' ');
+        getline(ss, argument4 , '\n');   
+    }
+    else if(command == ADD_COMMAND | command == MODIFY_COMMAND)
+    {
+        stringstream ss(argument);
+        getline(ss, argument1 , ' ');
+        getline(ss, argument2 , ' ');
+        getline(ss, argument3 , '\n ');
+    }
+    else 
+    { 
+        argument1 = argument ;
+    }
 
-    if(command == USER_COMMAND) 
-        return handleUser(userFd, argument1);
-    else if (command != PASS_COMMAND)
-        fdLastRequest.erase(userFd);
+    if (command == SIGN_IN_COMMAND)
+        return handleSignIn(argument1,argument2,userFd);
+    if (command == SIGN_UP_COMMAND)
+        return handleSignUp();
+    if (command == SET_TIME_COMMAND)
+        return handleSetTime();
+    if (command == PASS_DAY_COMMAND)
+        return handlePassDay();
+    if (command == ROOM_COMMAND)
+        return handleRoom();
+    if (command == CAPACITY_COMMAND)
+        return handleCapacity();
+    if (command == REMOVE_COMMAND)
+        return handleRemove();
+    if (command == CANCLE_COMMAND)
+        return handleCancle();
+    if (command == BOOK_COMMAND)
+        return handleBook();
+    if (command == ADD_COMMAND)
+        return handleAdd();
+    if (command == MODIFY_COMMAND)
+        return handleModify();
+    
+    
+    
 
-    if(command == PASS_COMMAND)
-        return handlePass(userFd, argument1);
-
-    if(fdLoggedInUser.find(userFd) == fdLoggedInUser.end())
-        return SHOULD_LOGIN;
-    User* currUser = findUserByFd(userFd);
-/*
-    if(command == PWD_COMMAND) 
-        return handlePwd(currUser);
-    if(command == MKD_COMMAND)
-        return handleMkd(currUser, argument1);
-    if(command == DELE_COMMAND)
-        return handleDele(currUser, argument1, argument2);
-    if(command == LS_COMMAND)
-        return handleLs(currUser, userDataFd);
-    if(command == CWD_COMMAND) 
-        return handleCwd(currUser, argument1);
-    if(command == RENAME_COMMAND)
-        return handleRename(currUser, argument1, argument2);
-    if(command == RETR_COMMAND)
-        return handleRetr(currUser, argument1, userDataFd);
-    if(command == QUIT_COMMAND)
-        return handleQuit(currUser, userFd);
- */       
     return SYNTAX_ERROR;  
 }
 
@@ -304,7 +362,10 @@ void Server::run(){
                         continue;
                     }
                     stringstream ss(buffer);
-                    string command, argument;
+                    string command, argument,command_name,dilema;
+
+                    getline(ss,command_name,'');
+                    getline(ss, dilema ,' ');
                     getline(ss, command, ' ');
                     getline(ss, argument, '\n');
                     if (command.back() == '\n')
