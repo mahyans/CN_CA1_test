@@ -40,7 +40,7 @@ map<string, vector<string>> parseJson(string fileName) {
             removeCharacter(value, ':');
             if(value != ""){
                 inputs[field].push_back(value);
-                //cout << field << value << endl;
+                //cout << field <<"    " <<  value << endl;
             }
                 
         }

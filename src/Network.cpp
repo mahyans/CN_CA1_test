@@ -11,5 +11,5 @@ int main(int argc, char const *argv[]) {
     //uncomment to see server info ("config.json")
     //server.printServer();
 
-    //server.run();
+    server.run();
 }

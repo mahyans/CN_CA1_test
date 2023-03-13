@@ -1,6 +1,6 @@
 #include "../include/Reservation.hpp"
 
-Reservation::Reservation(User _user, int _numOfBeds, string _reserveDate, string _checkoutDate){
+Reservation::Reservation(User* _user, int _numOfBeds, string _reserveDate, string _checkoutDate){
     user = _user;
     numOfBeds = _numOfBeds;
     reserveDate = _reserveDate;
@@ -18,7 +18,7 @@ int Reservation::getStartInterval(){
     return a;
 }
 
-int Reservation::getStartInterval(){
+int Reservation::getEndInterval(){
     stringstream ss(checkoutDate);
     string year, month, day;
     getline(ss, day, '-');
@@ -30,10 +30,10 @@ int Reservation::getStartInterval(){
 }
 
 string Reservation::toStringAdmin(){
-    return " [User] " + user.toString() + toString();
+    return user->toString() + toString();
 }
 
 string Reservation::toString(){
-    return " [beds] " + to_string(numOfBeds) +  
+    return " [number of beds] " + to_string(numOfBeds) +  
             " [reserve date] " + reserveDate + " [checkout date] " + checkoutDate + "\n";
 }
