@@ -19,12 +19,29 @@ int Reservation::getStartInterval(){
 }
 
 int Reservation::getEndInterval(){
-    stringstream ss(checkoutDate);
+    stringstream s(checkoutDate);
     string year, month, day;
-    getline(ss, day, '-');
-    getline(ss, month, '-');
-    getline(ss, year);
-    //cout << year << month << day << endl;
+    getline(s, day, '-');
+    getline(s, month, '-');
+    getline(s, year);
+    
+    int a = stoi(year+month+day);
+    /*cout <<"ch: " <<checkoutDate << "\n";
+    cout <<"pars: "<< year <<", "<< month <<", "<<  day << endl;
+    cout <<"ret: " << a << "\n";*/
+    return a;
+}
+
+int Reservation::getInterval(int start){
+    
+    stringstream x;
+    if(start == 1)x << reserveDate;
+    else x << checkoutDate;
+    string year, month, day;
+    getline(x, day, '-');
+    getline(x, month, '-');
+    getline(x, year);
+    cout << year << month << day << endl;
     int a = stoi(year+month+day);
     return a;
 }

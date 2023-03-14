@@ -1,37 +1,37 @@
 #include "../include/User.hpp"
 using namespace std;
 
-//int User::count{0};
+int User::count{0};
 
 User::User(string username, string pass) : username(username), pass(pass){
     admin = true;
     id = -1;
     loginStatus = false;
-    purse = "";
+    purse = 0;
     phoneNumber = "";
     address = "";
     count += 1;
     ID = count;
 }
 
-User::User(string username, string pass, string purse, string phone, string address)
-    : username(username), pass(pass), purse(purse), phoneNumber(phone), address(address){
+User::User(string username, string pass, string _purse, string phone, string address)
+    : username(username), pass(pass), phoneNumber(phone), address(address){
     admin = false;
     id = -1;
     loginStatus = false;
     count += 1;
     ID = count;
+    purse = stoi(_purse);
 }
 
 string User::toString() {
     stringstream strm;
-    strm << "User data: "<< " [id] "  << ID << " [username] " << username << " [password] " << pass << " [admin] " << admin << " [purse] " << purse << " [phone] " << phoneNumber << " [address] " << address << endl;
-    return strm.str();
-}
-void User::printUserAdmin()
-{
-    cout<<"User data: "<< " [id] "  << ID << " [username] " << username << " [admin] " << admin << " [purse] " << purse << " [phone] " << phoneNumber << " [address] " << address << endl;
+    if(!admin)
+        strm << "User data: "<< " [id] "  << ID << " [username] " << username <<  " [admin] " << admin << " [purse] " << purse << " [phone] " << phoneNumber << " [address] " << address << endl;
+    else 
+        strm << "User data: "<< " [id] "  << ID << " [username] " << username << " [admin] " << admin << endl;
 
+    return strm.str();
 }
 
 bool User::isValid(string username_) {
@@ -67,3 +67,9 @@ void User::logout(){
 bool User::isAdmin(){
     return admin;
 }
+
+bool User::canAfford(int _price){
+    if(purse >= _price) return true;
+    else return false;
+}
+

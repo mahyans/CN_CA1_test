@@ -10,11 +10,11 @@ void removeCharacter(string& str, char c){
 }
 
 // !!!!!!works with customizable json file with any permutation!!!!!!!
-map<string, vector<string> > parseJson(string fileName) {    
+map<string, vector<string>> parseJson(string fileName) {    
     ifstream file;
     file.open(fileName);
     string line, listString = "", field, value, dump;
-    map <string, vector<string> > inputs;
+    map <string, vector<string>> inputs;
     while(getline(file, line)) {
         stringstream ss(line);
 

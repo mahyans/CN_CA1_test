@@ -3,7 +3,7 @@ using namespace std;
 
 char SERVER_ABSOLUTE_PATH[BUFFER_SIZE];
 
-Server::Server(map<string, vector<string> > inputs)
+Server::Server(map<string, vector<string>> inputs)
 {
     convertConfig(inputs);
     serverCmdFd = setupServer(cmdChannelPort);
@@ -17,47 +17,8 @@ void Server::setDate(string date)
 {
     Date newDate = Date(date);
     systemDate = newDate;
-    
 }
 
-int Server::getFileSize(string fileName)
-{
-    ifstream in_file(fileName, ios::binary);
-    in_file.seekg(0, ios::end);
-    int file_size = in_file.tellg();
-    return file_size;
-}
-
-string Server::handleQuit(User *currUser, int userFd)
-{
-    fdLoggedInUser.erase(userFd);
-    currUser->logout();
-    return SUCCESSFUL_QUIT;
-}
-
-string Server::handleHelp()
-{
-    string help;
-    help += "214\n";
-    help += "user [username]: This command is used to submit a username for authentication.\n\n";
-    help += "pass [password]: This command is used to submit a password for the previously submitted username for authentication.";
-    help += "This command must be executed directly after the \"user\" command.\n\n";
-    help += "pwd: Show the path of the current working directoty.\n\n";
-    help += "mkd [path]: Make a new directory in the specified path.\n\n";
-    help += "dele [-f|-d] [file name| directory path]: Delete the file with the name or the directory in the path specified in its argument\n\n";
-    help += "ls: Show all the files and folders in the current directory.\n\n";
-    help += "cwd [path]: Change the current working directory and move to the specified path.\n\n";
-    help += "rename [from] [to]: Change the name of the file given in the first argument to the name specified in the second argument.\n\n";
-    help += "retr [file name]: Download the file with the specified name.\n\n";
-    help += "help: Show the system commands and their descriptions.\n\n";
-    help += "quit: Logout from the server.\n\n";
-    return help;
-}
-
-void Server::sendData(string file, int dataFd)
-{
-    send(dataFd, file.c_str(), strlen(file.c_str()), 0);
-}
 
 User *Server::findUserByFd(int userFd)
 {
@@ -75,37 +36,19 @@ User *Server::findUserById(int userId)
     return NULL;
 }
 
-string Server::handleUser(int userFd, string argument1)
+User *Server::findUserByName(string username_)
 {
-    if (fdLoggedInUser.find(userFd) != fdLoggedInUser.end())
-        return NEED_TO_LOGOUT;
-    User *curr_user = findUserByName(argument1);
-    if (curr_user)
-    {
-        if (!curr_user->isLoggedIn())
-        {
-            curr_user->updateFd(userFd);
-            fdLastRequest[userFd] = argument1;
-            return USERNAME_OK;
-        }
-        else
-            return ALREADY_LOGGED_IN;
-    }
-    else
-        return INVALID_LOGIN;
+    for (auto &user : users)
+        if (user.isValid(username_))
+            return &user;
+    return NULL;
 }
 
-string Server::handlePass(int userFd, string argument1)
-{
-    if (fdLastRequest.find(userFd) != fdLastRequest.end())
-    {
-        if (loginUser(argument1, userFd, fdLastRequest[userFd]))
-            return SUCCESSFUL_LOGIN;
-        else
-            return INVALID_LOGIN;
-    }
-    else
-        return BAD_SEQUENCE;
+Room *Server::findRoomByNumber(string num){
+    for (auto &room : rooms)
+        if (room.numMatches(num))
+            return &room;
+    return NULL;
 }
 
 void Server::printServer()
@@ -124,62 +67,40 @@ void Server::printServer()
         cout << user.toString();
 }
 
-User *Server::findUserByName(string username_)
-{
-    for (auto &user : users)
-        if (user.isValid(username_))
-            return &user;
-    return NULL;
-}
 
-bool Server::loginUser(string password, int fd, string lastUser)
-{
-    for (auto &user : users)
-    {
-        if (user.fdMatches(fd) && user.isValid(lastUser))
-        {
-            if (user.login(password))
-            {
-                fdLoggedInUser[fd] = lastUser;
-                return true;
-            }
-            else
-                return false;
-        }
-    }
-    return false;
-}
+
+
 
 string Server::handleCommand(string command, string argument, int userFd)
 {
-
-    curr_log += "Client (fd = " + to_string(userFd) + ") requested: " + command;
+    try{
+        curr_log += "Client (fd = " + to_string(userFd) + ") requested: " + command;
     writeLog();
 
-    string  argument1, argument2, argument3 , argument4;
-    User *currUser = findUserByFd(userFd);
-
+    string argument1, argument2, argument3, argument4;
     
-    if (command == SIGN_IN_COMMAND | command == CANCLE_COMMAND) 
+    
+
+    if (command == SIGN_IN_COMMAND | command == CANCLE_COMMAND)
     {
         stringstream ss(argument);
-        getline(ss, argument1 , ' ');
-        getline(ss, argument2 , '\n');
+        getline(ss, argument1, ' ');
+        getline(ss, argument2, '\n');
     }
-    else if(command == BOOK_COMMAND | command == USER_DATA)
+    else if (command == BOOK_COMMAND | command == USER_DATA)
     {
         stringstream ss(argument);
-        getline(ss, argument1 , ' ');
-        getline(ss, argument2 , ' ');
-        getline(ss, argument3 , ' ');
-        getline(ss, argument4 , '\n');   
+        getline(ss, argument1, ' ');
+        getline(ss, argument2, ' ');
+        getline(ss, argument3, ' ');
+        getline(ss, argument4, '\n');
     }
-    else if(command == ADD_COMMAND | command == MODIFY_COMMAND)
+    else if (command == ADD_COMMAND | command == MODIFY_COMMAND | command == NEW_DATA)
     {
         stringstream ss(argument);
-        getline(ss, argument1 , ' ');
-        getline(ss, argument2 , ' ');
-        getline(ss, argument3 , '\n');
+        getline(ss, argument1, ' ');
+        getline(ss, argument2, ' ');
+        getline(ss, argument3, '\n');
     }
     else if (command == DELE_COMMAND || command == RENAME_COMMAND)
     {
@@ -189,130 +110,265 @@ string Server::handleCommand(string command, string argument, int userFd)
     }
     else
         argument1 = argument;
-    
 
+    User* currUser = findUserByFd(userFd);
+
+    
     if (command == SET_TIME_COMMAND)
     {
-        try{
-        setDate(argument);
-        return SUCCESSFUL;
-        }catch(...){
+        try
+        {
+            setDate(argument);
+            return SUCCESSFUL;
+        }
+        catch (...)
+        {
             return BAD_ARGUMENT;
-        } 
+        }
     }
 
-    if (command == PASS_DAY_COMMAND)
+    else if (command == SIGN_UP_COMMAND)
     {
-        try{
-            if (currUser->isAdmin()){
-                systemDate.addDay(stoi(argument));
-                cout << systemDate.toSting() << endl;
-                return SUCCESSFUL;
-            }
-            return ACCESS_DENIED;
-        }catch(...){
-            return BAD_ARGUMENT;
-        }    
-    }
+        if (fdLoggedInUser.find(userFd) != fdLoggedInUser.end())
+            return NEED_TO_LOGOUT;
 
-    if (command == SIGN_UP_COMMAND)
-    {
         if (findUserByName(argument1) == NULL)
         {
             fdLastRequest[userFd] = argument1;
             return ENTER_USER_DATA;
         }
-        else return USER_ALREADY_EXIST;
-    }
-
-    if (command == USER_DATA)
-    {
-        if (fdLastRequest.find(userFd) != fdLastRequest.end())
-        {
-            string username =  fdLastRequest[userFd];
-            User newUser(username, argument1, argument2, argument3, argument4);
-            users.push_back(newUser);
-            return SUCCESSFUL_SIGNUP;
-        }
         else
-            return BAD_SEQUENCE;        
+            return USER_ALREADY_EXIST;
     }
 
-    if (command == SIGN_IN_COMMAND)
+    else if (command == USER_DATA)
+    {
+        try
+        {
+            if (fdLastRequest.find(userFd) != fdLastRequest.end())
+            {
+                string username = fdLastRequest[userFd];
+                User newUser(username, argument1, argument2, argument3, argument4);
+                users.push_back(newUser);
+                return SUCCESSFUL_SIGNUP;
+            }
+            else
+                return BAD_SEQUENCE;
+        }
+        catch (...)
+        {
+            return BAD_ARGUMENT;
+        }
+    }
+
+    else if (command == SIGN_IN_COMMAND)
     {
         if (fdLoggedInUser.find(userFd) != fdLoggedInUser.end())
             return NEED_TO_LOGOUT;
-        for(auto us : users)cout << us.toString() << endl;
-
-        User * currUser = findUserByName(argument1);
+        User *currUser = findUserByName(argument1);
         if (currUser)
         {
             if (currUser->login(argument2))
             {
+                currUser->updateFd(userFd);
                 fdLoggedInUser[userFd] = argument1;
                 return SUCCESSFUL_LOGIN;
             }
+            else{
+                return INVALID_USERNAME_PASS;
+            }
         }
-        else return INVALID_USERNAME_PASS;
+        else
+            return INVALID_USERNAME_PASS;
     }
 
-    else if(command == VIEW_USER_INFO)
+    else if (command == VIEW_USER_INFO)
     {
-        for (auto &user : users)
-            if (user.fdMatches(userFd))
-                cout << users[userFd].toString();
-                return  SUCCESSFUL;
+        return "\n--------YOUR_PROFILE----------\n" + currUser->toString();
     }
-    else if(command == VIEW_ALL_USERS)
+
+    else if (command == VIEW_ALL_USERS)
     {
-        if(currUser -> isAdmin())
+        stringstream users_data;
+        if (currUser->isAdmin())
         {
-            for (auto &user : users)
-                if (user.fdMatches(userFd))
-                    users[userFd].printUserAdmin();
-                    return SUCCESSFUL;
+            users_data << "\n--------USER_LIST----------\n";
+            for (auto user : users)
+            {
+                users_data << user.toString();
+            }
+            return users_data.str();
         }
         else
             return ACCESS_DENIED;
-
     }
-    else if(command == VIEW_ROOMS_INFO)
-    {
-        for(auto &room : rooms)
-            if(currUser -> isAdmin)
-                cout<<room.toStringAdmin();
-                if(room.getMaxCapacity() - room.getCapacity()!= room.getMaxCapacity())
-                    for(auto &res : room.getUsers())
-                        cout<<res;
-                        
-            else 
-                cout<<room.toString();
-    }
-
-    else if(command == BOOKING){
-
-    }else if(command == VIEW_USER_INFO){
-
-    }else if(command == VIEW_USER_INFO){
-
-    }else if(command == VIEW_USER_INFO){
-
-    }else if(command == VIEW_USER_INFO){
-
-    }else if(command == VIEW_USER_INFO){
-
-    }else if(command == VIEW_USER_INFO){
-
-    }
-
-
-
     
+    else if (command == VIEW_ROOMS_INFO)
+    {
+        stringstream ss;
+        ss << "\n--------ROOMS_INFO----------\n";
+        if (!currUser->isAdmin()){ 
+            for(auto room : rooms){
+                ss << room.toString();
+            }
+        }
+        else{
+            for(auto room : rooms){
+                ss << room.toStringAdmin();
+            }
+        }
+        return ss.str();
+    }
+
+    else if (command == BOOKING)
+    {
+        stringstream ss;
+        ss << "* Format: book <RoomNumber> <NumOfBeds> <CheckinDate> <CheckoutDate>\n"
+            << "* Help : RomNumber is number of room, NumOfBeds is number of beds.";
+        return ss.str();
+    }
+   
+    else if (command == BOOK_COMMAND){
+        if(currUser->isAdmin())return ACCESS_DENIED;
+        Room* wantedRoom = findRoomByNumber(argument1);
+        int num_of_beds = stoi(argument2);
+        if(wantedRoom){
+            if(currUser->canAfford(wantedRoom->getPrice() * num_of_beds)){
+                try{
+                    Reservation newRes(currUser, num_of_beds, argument3, argument4);
+                    if(wantedRoom->hasConflict(&newRes))return ROOM_IS_FULL;
+                    else{
+                        wantedRoom->addReservation(&newRes);
+                        currUser->reduceMoney(wantedRoom->getPrice() * num_of_beds);
+                        currUser->reservs.push_back("[room number]"+wantedRoom->getNum()+" "+newRes.toString());
+                        return SUCCESSFUL;
+                    } 
+                }catch(...){
+                    return BAD_ARGUMENT;
+                }
+            }
+            else return NOT_ENOUGH_MONEY;
+        }else return ROOM_NOT_FOUND;
+    }
+    
+    else if (command == CANCELING)
+    {
+        stringstream ss;
+        ss << "------------YOUR_RESERVATIONS---------------\n";
+        for(auto res:currUser->reservs) ss << res;
+        ss << "\n* Format: cancel <RoomNumber> <Num>\n"
+            << "* Help : RomNumber is number of room. Num is numbe of reserved beds that you want to cancel.";
+        return ss.str();
+    }
+    
+    else if (command == CANCLE_COMMAND)
+    {
+        try{
+            Room* wantedRoom = findRoomByNumber(argument1);
+            if(!wantedRoom)return ROOM_NOT_FOUND;
+            int num = stoi(argument2);
+            if(currUser->reservs.size() < num)return RESERVATIONN_NOT_FOUND;
+            if(wantedRoom->findNumOfreserveById(currUser->getId()) < num) return RESERVATIONN_NOT_FOUND; 
+            wantedRoom->removeReservationById(currUser->getId(), num);
+            return SUCCESSFUL;
+        }catch(...){
+            return INVALID_VAL;
+        }
+    }
+
+    else if (command == PASSDAY)
+    {
+        return "\n* Format: passDay <value>\n* Help: value is the number of days.";
+    }
+
+    else if (command == PASS_DAY_COMMAND)
+    {
+        if (fdLoggedInUser.find(userFd) == fdLoggedInUser.end())
+            return SHOULD_LOGIN;
+        try
+        {
+            if (currUser->isAdmin())
+            {
+                systemDate.addDay(stoi(argument));
+                cout << systemDate.toSting() << endl;
+                for(int j = 0; j < rooms.size(); j++){
+                    for(int i = 0; i< rooms[j].users.size(); i++){
+                        cout <<rooms[j].users[i].getEndInterval() << " " << systemDate.toInt() <<endl;
+                        if(rooms[j].users[i].getEndInterval() < systemDate.toInt())
+                            rooms[j].users.erase(rooms[j].users.begin()+i);
+                    }
+                }
+                return SUCCESSFUL;
+            }
+            return ACCESS_DENIED;
+        }
+        catch (...)
+        {
+            return BAD_ARGUMENT;
+        }
+    }
+    
+    else if (command == EDIT_INFO)
+    {
+        return ENTER_NEW_DATA;
+    }
+
+    else if (command == NEW_DATA){
+        currUser->edit(argument1, argument2, argument3);
+        return SUCCESSFUL_CHANGE;
+    }
+
+    else if (command == LEAVING_ROOM)
+    {
+        stringstream ss;
+        ss << "\n* Format: room <Value> \n"
+            << "* Help : Value is number of room.";
+        return ss.str();
+    }
+    else if (command == ROOM_COMMAND)
+    {
+        try{
+            Room* wantedRoom = findRoomByNumber(argument1);
+            if(!wantedRoom)return ROOM_NOT_FOUND;
+            if(wantedRoom->findNumOfreserveById(currUser->getId()) == 0) return RESERVATIONN_NOT_FOUND; 
+            wantedRoom->removeReservationById(currUser->getId(), 1);
+            return SUCCESSFUL;
+        }catch(...){
+            return INVALID_VAL;
+        }
+    }
+    else if (command == EDIT_ROOMS){
+        stringstream ss;
+        ss << "\n* Format: add <RoomNum> <maXCapacity> <Price>\n"
+            << "* Format: modify <RoomNum> <newMaXCapacity> <newPrice>\n"
+            << "* Format: remove <RoomNum> ";
+        return ss.str();
+    }
+    else if (command == MODIFY_COMMAND){
+
+    }
+    else if (command == REMOVE_COMMAND){
+
+    }
+    else if (command == ADD_COMMAND){
+
+    }
+    else if (command == LOGOUT)
+    {
+        User* currUser = findUserByFd(userFd);
+        fdLoggedInUser.erase(userFd);
+        currUser->logout();
+        return SUCCESSFUL_LOGOUT;
+    }
 
     return SYNTAX_ERROR;
+    }catch(...){
+        return INVALID_VAL;
+    }
+    
 }
 
-void Server::convertConfig(map<string, vector<string> > inputs)
+void Server::convertConfig(map<string, vector<string>> inputs)
 {
 
     cmdChannelPort = stoi(inputs[COMMAND_PORT][0]);
@@ -352,6 +408,8 @@ void Server::convertConfig(map<string, vector<string> > inputs)
             string reserveDate = roomsInfo["reserveDate"][index];
             string checkoutDate = roomsInfo["checkoutDate"][index];
             Reservation newRes(findUserById(id), numOfBeds, reserveDate, checkoutDate);
+            User* user = findUserById(id);
+            user->reservs.push_back(newRes.toString());
             newRoom.addReservation(&newRes);
             index += 1;
         }
@@ -413,7 +471,6 @@ void Server::run()
     int new_data_socket, new_cmd_socket, data_max_sd, cmd_max_sd;
     char buffer[BUFFER_SIZE] = {0};
     fd_set cmd_master_set, cmd_working_set;
-    map<int, int> cmdDataFd;
     FD_ZERO(&cmd_master_set);
     cmd_max_sd = serverCmdFd;
     FD_SET(serverCmdFd, &cmd_master_set);
@@ -459,10 +516,8 @@ void Server::run()
 
                         write(1, "Client disconnected!\n", 22);
                         close(i);
-                        close(cmdDataFd[i]);
+                        
                         FD_CLR(i, &cmd_master_set);
-                        auto it = cmdDataFd.find(i);
-                        cmdDataFd.erase(it);
                         continue;
                     }
                     stringstream ss(buffer);
@@ -472,6 +527,7 @@ void Server::run()
                     if (command.back() == '\n')
                         command.pop_back();
                     string response = handleCommand(command, argument, i);
+                    //string response = "ok";
                     strcpy(buffer, response.c_str());
                     curr_log += "Server response (fd = " + to_string(i) + ") was: " + buffer;
                     writeLog();

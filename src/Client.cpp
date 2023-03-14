@@ -35,7 +35,7 @@ int main(int argc, char const *argv[]) {
     printf("Welcome!\n");
     while (1) {
         if(is_loged_in)
-            printf("%s\n", MAIN_PAGE);
+            printf("\n-----------MAIN_PAGE----------\n%s\n", MAIN_PAGE);
         write(1, "Command -> ",11);
         memset(cmdBuff, 0, BUFFER_SIZE);
         read(0, cmdBuff, BUFFER_SIZE);
@@ -72,6 +72,26 @@ int main(int argc, char const *argv[]) {
             continue;
         }
 
+        if (!strcmp(cmdBuff, ENTER_NEW_DATA)){
+            stringstream ss;
+            string pass, phone, address;
+            for(int i = 0; i < 3; i++){
+                write(1, "Command -> ",11);
+                memset(cmdBuff, 0, BUFFER_SIZE);
+                read(0, cmdBuff, BUFFER_SIZE);
+                ss << cmdBuff ;
+            }
+            getline(ss, pass, '\n');
+            getline(ss, phone, '\n');
+            getline(ss, address, '\n');
+            string data = "newData " + pass + " " + phone + " " + address + "\n";
+            int a = send(cmd_socket, data.c_str(), strlen(data.c_str()), 0);
+            memset(cmdBuff, 0, BUFFER_SIZE);
+            recv(cmd_socket, cmdBuff, BUFFER_SIZE, 0);
+            printf("%s\n", cmdBuff);
+            continue;
+        }
+        
         if(!strcmp(cmdBuff, SUCCESSFUL_LOGIN)){
             is_loged_in = true;
             continue;
@@ -79,25 +99,14 @@ int main(int argc, char const *argv[]) {
 
         if (!strcmp(cmdBuff, SHOULD_LOGIN))
             continue;
-        if(string(currCommand) == LS_COMMAND || string(currCommand) == RETR_COMMAND) {
-            memset(dataBuff, 0, BUFFER_SIZE);
-            recv(data_socket, dataBuff, BUFFER_SIZE, 0);
-            if(!dataBuff)
-                continue;
-            printf("The data recieved from server is as follows:\n%s\n", dataBuff);
-        } 
-        if(string(currCommand) == RETR_COMMAND) {
-            stringstream ss(dataBuff);
-            string fileName, dump;
-            getline(ss, fileName, ':');
-            getline(ss, dump, '\n');
-            int sizeOfFilename = fileName.size()+1;
-            string res = string(dataBuff).substr(sizeOfFilename+1);
-            ofstream out("copy_of_"+string(fileName));
-            out << res;
-            out.close();
-        } 
+
+        if (!strcmp(cmdBuff, SUCCESSFUL_LOGOUT)){
+            is_loged_in = false;
+            continue;
+        }   
+            
+ 
     }
-    
+   
     close(cmd_socket);
 }
