@@ -3,7 +3,7 @@ using namespace std;
 
 char SERVER_ABSOLUTE_PATH[BUFFER_SIZE];
 
-Server::Server(map<string, vector<string>> inputs)
+Server::Server(map<string, vector<string> > inputs)
 {
     convertConfig(inputs);
     serverCmdFd = setupServer(cmdChannelPort);
@@ -256,13 +256,40 @@ string Server::handleCommand(string command, string argument, int userFd)
         else return INVALID_USERNAME_PASS;
     }
 
-    else if(command == VIEW_USER_INFO){
+    else if(command == VIEW_USER_INFO)
+    {
+        for (auto &user : users)
+            if (user.fdMatches(userFd))
+                cout << users[userFd].toString();
+                return  SUCCESSFUL;
+    }
+    else if(command == VIEW_ALL_USERS)
+    {
+        if(currUser -> isAdmin())
+        {
+            for (auto &user : users)
+                if (user.fdMatches(userFd))
+                    users[userFd].printUserAdmin();
+                    return SUCCESSFUL;
+        }
+        else
+            return ACCESS_DENIED;
 
-    }else if(command == VIEW_USER_INFO){
+    }
+    else if(command == VIEW_ROOMS_INFO)
+    {
+        for(auto &room : rooms)
+            if(currUser -> isAdmin)
+                cout<<room.toStringAdmin();
+                if(room.getMaxCapacity() - room.getCapacity()!= room.getMaxCapacity())
+                    for(auto &res : room.getUsers())
+                        cout<<res;
+                        
+            else 
+                cout<<room.toString();
+    }
 
-    }else if(command == VIEW_USER_INFO){
-
-    }else if(command == VIEW_USER_INFO){
+    else if(command == BOOKING){
 
     }else if(command == VIEW_USER_INFO){
 
@@ -285,7 +312,7 @@ string Server::handleCommand(string command, string argument, int userFd)
     return SYNTAX_ERROR;
 }
 
-void Server::convertConfig(map<string, vector<string>> inputs)
+void Server::convertConfig(map<string, vector<string> > inputs)
 {
 
     cmdChannelPort = stoi(inputs[COMMAND_PORT][0]);

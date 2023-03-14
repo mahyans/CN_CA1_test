@@ -12,8 +12,8 @@
 #include <sys/time.h>
 #include <dirent.h>
 #include <cstdio>
-#include <iostream>
-#include <bits/stdc++.h>
+#include <string>
+
 
 #define SUCCESSFUL_ADD "104: Successfully added."
 #define SUCCESSFUL_MODIFY "105: Successfully modefied."
@@ -37,6 +37,7 @@
 #define USER_ALREADY_EXIST "451: User already existed!"
 #define BAD_COMMANDS "503: Bad sequence of commands."
 #define BAD_ARGUMENT "500: BAD arguments."
+
 #define SIGN_IN_COMMAND "signin"
 #define SET_TIME_COMMAND "setTime"
 #define PASS_DAY_COMMAND "passDay"
@@ -49,6 +50,7 @@
 #define ADD_COMMAND "add"
 #define MODIFY_COMMAND "modify"
 #define USER_DATA "userData"
+
 #define VIEW_USER_INFO "1"
 #define VIEW_ALL_USERS "2"
 #define VIEW_ROOMS_INFO "3"

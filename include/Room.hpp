@@ -2,7 +2,7 @@
 #define ROOM_HEADER
 
 #include "IncludeAndDefine.hpp"
-#include "Reservation.hpp"
+#include "../include/Reservation.hpp"
 
 #define FULL 1;
 #define NOT_FULL 0;
@@ -15,6 +15,8 @@ class Room {
         void addReservation(Reservation* newRsv);
         bool hasConflict(Reservation* rsv);
         int getCapacity(){return capacity;};
+        int getMaxCapacity(){return maxCapacity;};
+        vector <Reservation> getUsers(return users;);
         std::string toString();
         std::string toStringAdmin();
     private:

@@ -1,7 +1,7 @@
 #include "../include/Room.hpp"
 using namespace std;
 
-int Room::count{0};
+//int Room::count{0};
 
 Room::Room(string number, int price, int maxCapacity, int capacity)
     : number(number), price(price), maxCapacity(maxCapacity), capacity(capacity){

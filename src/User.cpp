@@ -1,7 +1,7 @@
 #include "../include/User.hpp"
 using namespace std;
 
-int User::count{0};
+//int User::count{0};
 
 User::User(string username, string pass) : username(username), pass(pass){
     admin = true;
@@ -27,6 +27,11 @@ string User::toString() {
     stringstream strm;
     strm << "User data: "<< " [id] "  << ID << " [username] " << username << " [password] " << pass << " [admin] " << admin << " [purse] " << purse << " [phone] " << phoneNumber << " [address] " << address << endl;
     return strm.str();
+}
+void User::printUserAdmin()
+{
+    cout<<"User data: "<< " [id] "  << ID << " [username] " << username << " [admin] " << admin << " [purse] " << purse << " [phone] " << phoneNumber << " [address] " << address << endl;
+
 }
 
 bool User::isValid(string username_) {

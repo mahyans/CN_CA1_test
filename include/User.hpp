@@ -9,6 +9,7 @@ class User {
         User(std::string username, std::string pass);
         User(std::string username, std::string pass, std::string purse, std::string phone, std::string address);
         std::string toString();
+        void User::printUserAdmin();
         bool isValid(std::string username_);
         bool fdMatches(int fd);
         bool idMatches(int id);
