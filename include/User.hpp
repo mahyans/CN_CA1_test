@@ -3,13 +3,13 @@
 
 #include "IncludeAndDefine.hpp"
 
+
 class User {
     static int count;
     public:
         User(std::string username, std::string pass);
         User(std::string username, std::string pass, std::string purse, std::string phone, std::string address);
         std::string toString();
-        void User::printUserAdmin();
         bool isValid(std::string username_);
         bool fdMatches(int fd);
         bool idMatches(int id);
@@ -18,15 +18,17 @@ class User {
         bool isLoggedIn();
         void logout();    
         bool isAdmin();
-        void setPurse(std::string purse_){purse = purse_;};
-        void setPhone(std::string phone_){phoneNumber = phone_;};
-        void setaddress(std::string add_){address = add_;};
+        void reduceMoney(int howMuch){purse -= howMuch;};
+        bool canAfford(int _price);
+        int getId(){return ID;};
+        std::vector<std::string>reservs;
+        void edit(std::string pas, std::string phone, std::string ad){pass = pas; phoneNumber = phone; address = ad ;};
     private:
         int id;
-        int ID;
+        int ID, purse;
         std::string username, pass;
         bool admin, loginStatus;
-        std::string purse, phoneNumber, address;
+        std::string phoneNumber, address;
 };
 
 #endif

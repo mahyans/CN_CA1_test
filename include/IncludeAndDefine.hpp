@@ -12,8 +12,8 @@
 #include <sys/time.h>
 #include <dirent.h>
 #include <cstdio>
-#include <string>
-
+#include <iostream>
+#include <bits/stdc++.h>
 
 #define SUCCESSFUL_ADD "104: Successfully added."
 #define SUCCESSFUL_MODIFY "105: Successfully modefied."
@@ -21,13 +21,15 @@
 #define ROOM_NOT_FOUND "101: The desired room was not found"
 #define RESERVATIONN_NOT_FOUND "102: Your reservation was not found"
 #define NOT_ENOUGH_MONEY "108: Your account balance is not enough"
-#define ROMM_IS_FULL "109: The room capacity is full"
+#define ROOM_IS_FULL "109: The room capacity is full"
 #define SUCCESSFUL "110: Successfully done."
 #define ROOM_ALREADY_EXISTS "111: This room already exists."
 #define SUCCESSFUL_LOGOUT "201: User logged out successfully."
 #define SUCCESSFUL_LOGIN "230: User logged in."
 #define SUCCESSFUL_SIGNUP "231: User successfully signed up."
 #define ENTER_USER_DATA "311: User signed up. Enter your password, purse, phone and address."
+#define ENTER_NEW_DATA "310: Enter yout new Password, Phone and Address."
+#define NEW_DATA "newData"
 #define SUCCESSFUL_CHANGE "312: Information was changed successfully."
 #define INVALID_VAL "401: Invalid value!"
 #define ACCESS_DENIED "403: Access denied!"
@@ -35,9 +37,8 @@
 #define SUCCESSFUL_LEAVING "413: Successfully leaving."
 #define INVALID_USERNAME_PASS "430: Invalid username or password."
 #define USER_ALREADY_EXIST "451: User already existed!"
-#define BAD_COMMANDS "503: Bad sequence of commands."
+#define BAD_SEQUENCE "503: Bad sequence of commands."
 #define BAD_ARGUMENT "500: BAD arguments."
-
 #define SIGN_IN_COMMAND "signin"
 #define SET_TIME_COMMAND "setTime"
 #define PASS_DAY_COMMAND "passDay"
@@ -45,12 +46,11 @@
 #define CAPACITY_COMMAND "capacity"
 #define REMOVE_COMMAND "remove"
 #define SIGN_UP_COMMAND "signup"
-#define CANCLE_COMMAND "cancle"
+#define CANCLE_COMMAND "cancel"
 #define BOOK_COMMAND "book"
 #define ADD_COMMAND "add"
 #define MODIFY_COMMAND "modify"
 #define USER_DATA "userData"
-
 #define VIEW_USER_INFO "1"
 #define VIEW_ALL_USERS "2"
 #define VIEW_ROOMS_INFO "3"
@@ -59,12 +59,12 @@
 #define PASSDAY "6"
 #define EDIT_INFO "7"
 #define LEAVING_ROOM "8"
-#define VIEW_ALL_ROOMS "9"
+#define EDIT_ROOMS "9"
 #define LOGOUT "0"
 
 
 #define MAIN_PAGE "1. View user information\n2. View all users\n3. View rooms information\n4. Booking\n5. Canceling\n6. Pass day\n7.Edit information\n8.Leaving room\n9. Rooms\n0. Logout"
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 102400
 #define LOG_FILE_NAME "/configuration/log.txt"
 #define SUCCESSFUL_QUIT "221: Successful Quit."
 #define CANT_OPEN_DATA_CONNECTION "425: Can't open data connection."
@@ -79,7 +79,7 @@
 #define ALREADY_LOGGED_IN "430: User already logged in."
 #define INVALID_LOGIN "430: Invalid username or password."
 
-#define BAD_SEQUENCE "503: Bad sequence of commands."
+
 #define SHOULD_LOGIN "332: Need account for login."
 
 #define USER_COMMAND "user"

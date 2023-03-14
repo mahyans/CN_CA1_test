@@ -1,7 +1,7 @@
 #include "IncludeAndDefine.hpp"
 
 class Date{
-    int day, month, year;
+    int day, month, year, total;
     public:
         Date(string strDate){
             stringstream ss(strDate);
@@ -12,6 +12,7 @@ class Date{
             day = stoi(_day);
             month = stoi(_month);
             year = stoi(_year);
+            total = stoi(_year+_month+_day);
         }
         void addDay(int days){
             day += days;
@@ -28,6 +29,9 @@ class Date{
             stringstream ss;
             ss << day << "-" << month << "-" << year;
             return ss.str();
+        }
+        int toInt(){
+            return total;
         }
 
 };
