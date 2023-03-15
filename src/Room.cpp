@@ -1,14 +1,26 @@
 #include "../include/Room.hpp"
 using namespace std;
 
-int Room::count{0};
+//int Room::count{0};
 
 Room::Room(string number, int price, int maxCapacity, int _capacity)
     : number(number), price(price), maxCapacity(maxCapacity){
     capacity = maxCapacity;
     status = NOT_FULL;
 }
+int Room::getPrice()
+{
+    return price;
+}
 
+int Room::getCapacity()
+{
+    return capacity;
+}
+int Room::getMaxCapacity()
+{
+    return maxCapacity;
+}
 bool Room::hasConflict(Reservation* newRes){
     int start = newRes->getStartInterval();
     int end = newRes->getEndInterval();
@@ -52,6 +64,7 @@ void Room::removeReservationById(int id, int n){
         }
     }
 }
+                                                                                                        
 
 void Room::addReservation(Reservation* rs){
     capacity -= rs->getNumOfBeds();
@@ -65,8 +78,6 @@ bool Room::numMatches(string _num){
         return true;
     }else return false;
 }
-
-
 
 string Room::toString(){
     stringstream ss, ss1;
@@ -88,4 +99,13 @@ string Room::toStringAdmin(){
             " [price] " << price << " [max capactiy] " << maxCapacity <<  
             " [reservations] " << "\n{" << ss1.str() << "} \n";
     return ss.str();
+}
+
+
+void Room::modify(string number,int newMaxCapacity,int newPrice)
+{
+    if(numMatches(number))
+        maxCapacity = newMaxCapacity;
+        price = newPrice ;
+
 }

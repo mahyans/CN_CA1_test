@@ -2,6 +2,6 @@
 #define PARSER_HEADER
 
 #include <bits/stdc++.h>
-std::map<std::string, std::vector<std::string>> parseJson(std::string fileName);
+std::map<std::string, std::vector<std::string> > parseJson(std::string fileName);
 
 #endif
