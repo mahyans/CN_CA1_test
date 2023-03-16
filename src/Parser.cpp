@@ -8,11 +8,13 @@ bool hasCharacter(string line, char c) {
 void removeCharacter(string& str, char c){
     str.erase(remove(str.begin(), str.end(), c), str.end());
 }
-map<string, vector<string> > parseJson(string fileName) {    
+
+// !!!!!!works with customizable json file with any permutation!!!!!!!
+map<string, vector<string>> parseJson(string fileName) {    
     ifstream file;
     file.open(fileName);
     string line, listString = "", field, value, dump;
-    map <string, vector<string> > inputs;
+    map <string, vector<string>> inputs;
     while(getline(file, line)) {
         stringstream ss(line);
 
@@ -40,9 +42,11 @@ map<string, vector<string> > parseJson(string fileName) {
                 inputs[field].push_back(value);
                 //cout << field <<"    " <<  value << endl;
             }
-             
+                
         }
     }
+
+    
     file.close();
     return inputs;
 }

@@ -72,3 +72,4 @@ bool User::canAfford(int _price){
     if(purse >= _price) return true;
     else return false;
 }
+

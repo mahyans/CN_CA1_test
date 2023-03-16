@@ -2,6 +2,10 @@
 #include "../include/Parser.hpp"
 
 using namespace std;
+char SERVER_ABSOLUTE_PATH[BUFFER_SIZE];
+string curr_log = "";
+string log_path = string(SERVER_ABSOLUTE_PATH) + LOG_FILE_NAME;
+
 
 int connectServer(int port, string host) {
     int fd;
@@ -20,7 +24,29 @@ int connectServer(int port, string host) {
     return fd;
 }
 
+void writeLog(string curr_log, string log_path)
+{
+    if (curr_log == "")
+        return;
+
+    time_t now = time(0);
+    char *dt = strtok(ctime(&now), "\n");
+    string newLog = "[";
+    newLog += dt;
+    newLog += "] ";
+    newLog += curr_log;
+    newLog += "\n";
+
+    ofstream logFile;
+    logFile.open(log_path, ios_base::app);
+    logFile << newLog;
+    logFile.close();
+    curr_log = "";
+}
+
 int main(int argc, char const *argv[]) {
+    
+
     int data_socket, cmd_socket;
     char cmdBuff[BUFFER_SIZE] = {0}, dataBuff[BUFFER_SIZE] = {0};
     char msgtoServer[BUFFER_SIZE] = {0};
@@ -33,6 +59,8 @@ int main(int argc, char const *argv[]) {
     cmd_socket = connectServer(cmd_port, host_name);
 
     printf("Welcome!\n");
+    getcwd(SERVER_ABSOLUTE_PATH, BUFFER_SIZE);
+    writeLog("client connect\n", log_path +"client.txt");
     while (1) {
         if(is_loged_in)
             printf("\n-----------MAIN_PAGE----------\n%s\n", MAIN_PAGE);
@@ -49,7 +77,7 @@ int main(int argc, char const *argv[]) {
 
         memset(cmdBuff, 0, BUFFER_SIZE);
         recv(cmd_socket, cmdBuff, BUFFER_SIZE, 0);
-        printf("%s\n", cmdBuff);
+        printf("\n-----------SERVER_RESPONSE-----------\n%s\n", cmdBuff);
 
         if (!strcmp(cmdBuff, ENTER_USER_DATA)){
             stringstream ss;
@@ -68,7 +96,7 @@ int main(int argc, char const *argv[]) {
             int a = send(cmd_socket, data.c_str(), strlen(data.c_str()), 0);
             memset(cmdBuff, 0, BUFFER_SIZE);
             recv(cmd_socket, cmdBuff, BUFFER_SIZE, 0);
-            printf("%s\n", cmdBuff);
+            printf("\n-----------SERVER_RESPONSE-----------\n%s\n", cmdBuff);
             continue;
         }
 
@@ -88,7 +116,7 @@ int main(int argc, char const *argv[]) {
             int a = send(cmd_socket, data.c_str(), strlen(data.c_str()), 0);
             memset(cmdBuff, 0, BUFFER_SIZE);
             recv(cmd_socket, cmdBuff, BUFFER_SIZE, 0);
-            printf("%s\n", cmdBuff);
+            printf("\n-----------SERVER_RESPONSE-----------\n%s\n", cmdBuff);
             continue;
         }
         
@@ -103,8 +131,7 @@ int main(int argc, char const *argv[]) {
         if (!strcmp(cmdBuff, SUCCESSFUL_LOGOUT)){
             is_loged_in = false;
             continue;
-        }   
-            
+        }       
  
     }
    

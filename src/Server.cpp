@@ -3,7 +3,7 @@ using namespace std;
 
 char SERVER_ABSOLUTE_PATH[BUFFER_SIZE];
 
-Server::Server(map<string, vector<string> > inputs)
+Server::Server(map<string, vector<string>> inputs)
 {
     convertConfig(inputs);
     serverCmdFd = setupServer(cmdChannelPort);
@@ -35,14 +35,7 @@ User *Server::findUserById(int userId)
             return &user;
     return NULL;
 }
-bool Server ::roomExists(int num)
-{
-    for(auto &room : rooms)
-        if(room.numMatches(to_string(num)))
-            return true;
-        return false;
 
-}
 User *Server::findUserByName(string username_)
 {
     for (auto &user : users)
@@ -82,7 +75,7 @@ string Server::handleCommand(string command, string argument, int userFd)
 {
     try{
         curr_log += "Client (fd = " + to_string(userFd) + ") requested: " + command;
-    writeLog();
+        writeLog();
 
     string argument1, argument2, argument3, argument4;
     
@@ -127,6 +120,7 @@ string Server::handleCommand(string command, string argument, int userFd)
         {
             setDate(argument);
             return SUCCESSFUL;
+            curr_log += "Set time to "+ systemDate.toSting() + " (fd = " + to_string(userFd);
         }
         catch (...)
         {
@@ -157,7 +151,10 @@ string Server::handleCommand(string command, string argument, int userFd)
                 string username = fdLastRequest[userFd];
                 User newUser(username, argument1, argument2, argument3, argument4);
                 users.push_back(newUser);
+                curr_log += "Signup  successfully (fd = " + to_string(userFd);
+                writeLog();
                 return SUCCESSFUL_SIGNUP;
+                
             }
             else
                 return BAD_SEQUENCE;
@@ -179,6 +176,8 @@ string Server::handleCommand(string command, string argument, int userFd)
             {
                 currUser->updateFd(userFd);
                 fdLoggedInUser[userFd] = argument1;
+                curr_log += "Signin  successfully (fd = " + to_string(userFd);
+                writeLog();
                 return SUCCESSFUL_LOGIN;
             }
             else{
@@ -351,84 +350,34 @@ string Server::handleCommand(string command, string argument, int userFd)
             << "* Format: remove <RoomNum> ";
         return ss.str();
     }
+    
     else if (command == MODIFY_COMMAND){
-        if (currUser->isAdmin())
-        {
-            if(findRoomByNumber(argument1))
-            {
-                if(rooms[stoi(argument1)].getCapacity() != rooms[stoi(argument1)].getMaxCapacity() )
-                {
-                    rooms[stoi(argument1)].modify(argument1,stoi(argument2),stoi(argument3));
-                    return SUCCESSFUL_MODIFY;
-                }
-                else
-                {
-                    return ROOM_IS_FULL;
-                }
-            }
-            else 
-            {
-                return ROOM_NOT_FOUND;
-            }
-        }
-        else
-        {
-            return ACCESS_DENIED;
-        }
-                
+        if (!currUser->isAdmin())return ACCESS_DENIED;
+        Room* wantedRoom = findRoomByNumber(argument1);
+        if(!wantedRoom) return ROOM_NOT_FOUND;
+        wantedRoom->editRoom(stoi(argument2), stoi(argument3));
+        return SUCCESSFUL_MODIFY;
     }
+
     else if (command == REMOVE_COMMAND){
-        if(currUser->isAdmin())
-        {
-            if(findRoomByNumber(argument1))
-            {
-                if(rooms[stoi(argument1)].getCapacity() != rooms[stoi(argument1)].getMaxCapacity() )
-                {
-                    rooms.erase(rooms.begin()+ stoi(argument1));
-                    return SUCCESSFUL_DELETE;
-                }
-                else
-                {
-                    return ROOM_IS_FULL;
-                }
-            }
-            else 
-            {
-                return ROOM_NOT_FOUND;
+        if (!currUser->isAdmin())return ACCESS_DENIED;
+        for(int i = 0; i < rooms.size(); i++){
+            if(rooms[i].numMatches(argument1)){
+                rooms.erase(rooms.begin()+i);
+                return SUCCESSFUL_DELETE;
             }
         }
-        else
-        {
-            return ACCESS_DENIED;
-        }
-       
-
-
     }
-    else if (command == ADD_COMMAND)
-    {
-        if(currUser->isAdmin())
-        {
-            if(!roomExists(stoi(argument1))){
-                string numb_ = argument1;
-                int price = stoi(argument3);
-                int maxCap = stoi(argument2);
-                int cap = maxCap;
-                Room newRoom(numb_, price, maxCap, cap);
-                rooms.push_back(newRoom);
-                return SUCCESSFUL_ADD;
-            }
-            else 
-            {
-                return ROOM_ALREADY_EXISTS;
-            }
 
-        }
-        else
-            return ACCESS_DENIED;
-
-
+    else if (command == ADD_COMMAND){
+        if (!currUser->isAdmin())return ACCESS_DENIED;
+        Room* wantedRoom = findRoomByNumber(argument1);
+        if(wantedRoom) return ROOM_ALREADY_EXISTS;
+        Room newRoom(argument1, stoi(argument3), stoi(argument2), stoi(argument2));
+        rooms.push_back(newRoom);
+        return SUCCESSFUL_ADD;
     }
+
     else if (command == LOGOUT)
     {
         User* currUser = findUserByFd(userFd);
@@ -444,7 +393,7 @@ string Server::handleCommand(string command, string argument, int userFd)
     
 }
 
-void Server::convertConfig(map<string, vector<string> > inputs)
+void Server::convertConfig(map<string, vector<string>> inputs)
 {
 
     cmdChannelPort = stoi(inputs[COMMAND_PORT][0]);
