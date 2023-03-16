@@ -1,44 +1,32 @@
 #include "../include/Room.hpp"
 using namespace std;
 
-//int Room::count{0};
+int Room::count{0};
 
 Room::Room(string number, int price, int maxCapacity, int _capacity)
     : number(number), price(price), maxCapacity(maxCapacity){
     capacity = maxCapacity;
     status = NOT_FULL;
 }
-int Room::getPrice()
-{
-    return price;
-}
 
-int Room::getCapacity()
-{
-    return capacity;
-}
-int Room::getMaxCapacity()
-{
-    return maxCapacity;
-}
 bool Room::hasConflict(Reservation* newRes){
-    int start = newRes->getStartInterval();
-    int end = newRes->getEndInterval();
+    int start = newRes->getInterval(1);
+    int end = newRes->getInterval(0);
     int wanted_beds = newRes->getNumOfBeds();
     int total_beds = 0;
     //cout << start << " " << end << endl;
     for (auto reserve : users){
-        int res1 = reserve.getStartInterval();
-        int res2 = reserve.getEndInterval();
-        /*cout <<"* " << res1 << " " << res2 << endl;
-        cout << (res1 <= start & start <= res2);
-        cout << (res1 <= end & end <= res2);
-        cout << ((res1 <= start & start <= res2) | (res1 <= end & end <= res2)) << endl;*/
+        int res1 = reserve.getInterval(1);
+        int res2 = reserve.getInterval(0);
+       // cout <<"* " << res1 << " " << res2 << endl;
+       // cout << (res1 <= start & start <= res2);
+        //cout << (res1 <= end & end <= res2);
+       // cout << ((res1 <= start & start <= res2) | (res1 <= end & end <= res2)) << endl;
         
         bool time_confilct = (res1 <= start & start <= res2) | (res1 <= end & end <= res2);
         if( time_confilct )
             total_beds += reserve.getNumOfBeds();
-        //cout << total_beds << endl;
+        cout << total_beds << endl;
     }
     if( wanted_beds > maxCapacity - total_beds )
             return true;
@@ -64,6 +52,7 @@ void Room::removeReservationById(int id, int n){
         }
     }
 }
+
 void Room::addReservation(Reservation* rs){
     capacity -= rs->getNumOfBeds();
     if(capacity == 0)
@@ -76,6 +65,9 @@ bool Room::numMatches(string _num){
         return true;
     }else return false;
 }
+
+
+
 string Room::toString(){
     stringstream ss, ss1;
     for(auto res : users){
@@ -86,6 +78,7 @@ string Room::toString(){
             " [reservations] " << "\n{" << ss1.str() << "} \n";
     return ss.str();
 }
+
 string Room::toStringAdmin(){
     stringstream ss, ss1;
     for(auto res : users){
@@ -95,11 +88,4 @@ string Room::toStringAdmin(){
             " [price] " << price << " [max capactiy] " << maxCapacity <<  
             " [reservations] " << "\n{" << ss1.str() << "} \n";
     return ss.str();
-}
-void Room::modify(string number,int newMaxCapacity,int newPrice)
-{
-    if(numMatches(number))
-        maxCapacity = newMaxCapacity;
-        price = newPrice ;
-
 }

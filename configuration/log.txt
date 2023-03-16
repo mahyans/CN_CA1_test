@@ -1703,3 +1703,462 @@ User data:  [id] 4 [username] Pedram [admin] 0 [purse] 10 [phone] 00989112659874
 
 [Mon Mar 13 23:48:49 2023] Client (fd = 4) requested: passDay
 [Mon Mar 13 23:48:49 2023] Server response (fd = 4) was: 110: Successfully done.
+[Tue Mar 14 00:18:36 2023] Server is offline.
+[Wed Mar 15 06:41:39 2023] Server is now online.
+[Wed Mar 15 06:41:48 2023] new client connected with fd 4
+[Wed Mar 15 06:42:01 2023] Client (fd = 4) requested: signin
+[Wed Mar 15 06:42:01 2023] Server response (fd = 4) was: 230: User logged in.
+[Wed Mar 15 06:42:21 2023] Client (fd = 4) requested: 3
+[Wed Mar 15 06:42:21 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+
+[Wed Mar 15 06:44:02 2023] Client (fd = 4) requested: book
+[Wed Mar 15 06:44:02 2023] Server response (fd = 4) was: 110: Successfully done.
+[Wed Mar 15 07:02:24 2023] Client on fd 4 disconnected
+[Wed Mar 15 07:02:33 2023] Server is offline.
+[Wed Mar 15 07:02:46 2023] Server is now online.
+[Wed Mar 15 07:02:51 2023] new client connected with fd 4
+[Wed Mar 15 07:03:11 2023] Client (fd = 4) requested: signin
+[Wed Mar 15 07:03:11 2023] Server response (fd = 4) was: 230: User logged in.
+[Wed Mar 15 07:03:23 2023] Client (fd = 4) requested: 3
+[Wed Mar 15 07:03:23 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+
+[Wed Mar 15 07:03:49 2023] Client (fd = 4) requested: book
+[Wed Mar 15 07:03:49 2023] Server response (fd = 4) was: 110: Successfully done.
+[Wed Mar 15 07:08:15 2023] Server is offline.
+[Wed Mar 15 07:08:26 2023] Server is now online.
+[Wed Mar 15 07:08:32 2023] new client connected with fd 4
+[Wed Mar 15 07:08:50 2023] Client (fd = 4) requested: signin
+[Wed Mar 15 07:08:50 2023] Server response (fd = 4) was: 230: User logged in.
+[Wed Mar 15 07:09:16 2023] Client (fd = 4) requested: book
+[Wed Mar 15 07:09:16 2023] Server response (fd = 4) was: 110: Successfully done.
+[Wed Mar 15 07:30:31 2023] Server is offline.
+[Wed Mar 15 07:30:53 2023] Server is now online.
+[Wed Mar 15 07:30:57 2023] new client connected with fd 4
+[Wed Mar 15 07:31:08 2023] Client (fd = 4) requested: signin
+[Wed Mar 15 07:31:08 2023] Server response (fd = 4) was: 230: User logged in.
+[Wed Mar 15 07:31:28 2023] Client (fd = 4) requested: book
+[Wed Mar 15 07:31:28 2023] Server response (fd = 4) was: 110: Successfully done.
+[Wed Mar 15 07:35:00 2023] Server is offline.
+[Wed Mar 15 07:35:12 2023] Server is now online.
+[Wed Mar 15 07:35:16 2023] new client connected with fd 4
+[Wed Mar 15 07:35:20 2023] Client (fd = 4) requested: signin
+[Wed Mar 15 07:35:20 2023] Server response (fd = 4) was: 230: User logged in.
+[Wed Mar 15 07:35:32 2023] Client (fd = 4) requested: book
+[Wed Mar 15 07:35:32 2023] Server response (fd = 4) was: 110: Successfully done.
+[Thu Mar 16 06:04:52 2023] Server is now online.
+[Thu Mar 16 06:05:04 2023] new client connected with fd 4
+[Thu Mar 16 06:05:11 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 06:05:11 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 06:05:36 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 06:05:36 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+
+[Thu Mar 16 06:06:50 2023] Client (fd = 4) requested: book
+[Thu Mar 16 06:06:50 2023] Server response (fd = 4) was: 110: Successfully done.
+[Thu Mar 16 06:17:49 2023] Server is offline.
+[Thu Mar 16 06:18:01 2023] Server is now online.
+[Thu Mar 16 06:18:15 2023] new client connected with fd 4
+[Thu Mar 16 06:18:25 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 06:18:25 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 06:18:53 2023] Client (fd = 4) requested: book
+[Thu Mar 16 06:18:53 2023] Server response (fd = 4) was: 110: Successfully done.
+[Thu Mar 16 06:25:33 2023] Client on fd 4 disconnected
+[Thu Mar 16 06:25:39 2023] Server is offline.
+[Thu Mar 16 06:27:06 2023] Server is now online.
+[Thu Mar 16 06:27:10 2023] new client connected with fd 4
+[Thu Mar 16 06:27:28 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 06:27:28 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 06:27:54 2023] Client (fd = 4) requested: book
+[Thu Mar 16 06:27:54 2023] Server response (fd = 4) was: 110: Successfully done.
+[Thu Mar 16 06:31:25 2023] Server is offline.
+[Thu Mar 16 06:31:41 2023] Server is now online.
+[Thu Mar 16 06:31:46 2023] new client connected with fd 4
+[Thu Mar 16 06:32:00 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 06:32:00 2023] Server response (fd = 4) was: 430: Invalid username or password.
+[Thu Mar 16 06:32:09 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 06:32:09 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 06:32:27 2023] Client (fd = 4) requested: book
+[Thu Mar 16 06:32:27 2023] Server response (fd = 4) was: 110: Successfully done.
+[Thu Mar 16 06:36:14 2023] Server is offline.
+[Thu Mar 16 06:36:35 2023] Server is now online.
+[Thu Mar 16 06:36:40 2023] new client connected with fd 4
+[Thu Mar 16 06:37:05 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 06:37:05 2023] Server response (fd = 4) was: 430: Invalid username or password.
+[Thu Mar 16 06:37:22 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 06:37:22 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 06:37:24 2023] Client (fd = 4) requested: book
+[Thu Mar 16 06:37:24 2023] Server response (fd = 4) was: 110: Successfully done.
+[Thu Mar 16 07:11:22 2023] Server is offline.
+[Thu Mar 16 07:19:29 2023] Server is now online.
+[Thu Mar 16 07:19:39 2023] new client connected with fd 4
+[Thu Mar 16 07:19:51 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 07:19:51 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 07:20:10 2023] Client (fd = 4) requested: book
+[Thu Mar 16 07:20:10 2023] Server response (fd = 4) was: 109: The room capacity is full
+[Thu Mar 16 07:20:31 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 07:20:31 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+
+[Thu Mar 16 07:22:12 2023] Client (fd = 4) requested: book
+[Thu Mar 16 07:22:12 2023] Server response (fd = 4) was: 109: The room capacity is full
+[Thu Mar 16 07:23:42 2023] Client (fd = 4) requested: book
+[Thu Mar 16 07:23:42 2023] Server response (fd = 4) was: 110: Successfully done.
+[Thu Mar 16 07:23:47 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 07:23:47 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+ [number of beds] 1 [reserve date] 25-01-2023 [checkout date] 28-01-2023
+} 
+
+[Thu Mar 16 07:25:55 2023] Server is offline.
+[Thu Mar 16 07:26:12 2023] Server is now online.
+[Thu Mar 16 07:26:16 2023] new client connected with fd 4
+[Thu Mar 16 07:26:31 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 07:26:31 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 07:26:39 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 07:26:39 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+
+[Thu Mar 16 07:27:35 2023] Client (fd = 4) requested: book
+[Thu Mar 16 07:27:35 2023] Server response (fd = 4) was: 109: The room capacity is full
+[Thu Mar 16 07:28:28 2023] Client (fd = 4) requested: book
+[Thu Mar 16 07:28:28 2023] Server response (fd = 4) was: 109: The room capacity is full
+[Thu Mar 16 07:58:12 2023] Client on fd 4 disconnected
+[Thu Mar 16 07:58:14 2023] Server is offline.
+[Thu Mar 16 07:58:18 2023] Server is now online.
+[Thu Mar 16 07:58:22 2023] new client connected with fd 4
+[Thu Mar 16 07:58:29 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 07:58:29 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 07:58:49 2023] Client (fd = 4) requested: book
+[Thu Mar 16 07:58:49 2023] Server response (fd = 4) was: 110: Successfully done.
+[Thu Mar 16 07:58:58 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 07:58:58 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+} 
+
+[Thu Mar 16 07:59:35 2023] Client (fd = 4) requested: book
+[Thu Mar 16 07:59:35 2023] Server response (fd = 4) was: 109: The room capacity is full
+[Thu Mar 16 07:59:39 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 07:59:39 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+} 
+
+[Thu Mar 16 10:43:31 2023] Server is offline.
+[Thu Mar 16 10:43:59 2023] Server is now online.
+[Thu Mar 16 10:44:03 2023] new client connected with fd 4
+[Thu Mar 16 10:44:08 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 10:44:08 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 10:44:25 2023] Client (fd = 4) requested: 2
+[Thu Mar 16 10:44:25 2023] Server response (fd = 4) was: 403: Access denied!
+[Thu Mar 16 10:44:46 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 10:44:46 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+
+[Thu Mar 16 10:45:51 2023] Client (fd = 4) requested: 6
+[Thu Mar 16 10:45:51 2023] Server response (fd = 4) was: 
+* Format: passDay <value>
+* Help: value is the number of days.
+[Thu Mar 16 10:45:57 2023] Client (fd = 4) requested: passDay
+[Thu Mar 16 10:45:57 2023] Server response (fd = 4) was: 403: Access denied!
+[Thu Mar 16 10:46:02 2023] Client (fd = 4) requested: 5
+[Thu Mar 16 10:46:02 2023] Server response (fd = 4) was: ------------YOUR_RESERVATIONS---------------
+ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+
+* Format: cancel <RoomNumber> <Num>
+* Help : RomNumber is number of room. Num is numbe of reserved beds that you want to cancel.
+[Thu Mar 16 10:47:50 2023] Client (fd = 4) requested: cancel
+[Thu Mar 16 10:47:50 2023] Server response (fd = 4) was: 110: Successfully done.
+[Thu Mar 16 10:47:54 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 10:47:54 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+
+[Thu Mar 16 10:48:29 2023] Client (fd = 4) requested: 9
+[Thu Mar 16 10:48:29 2023] Server response (fd = 4) was: 
+* Format: add <RoomNum> <maXCapacity> <Price>
+* Format: modify <RoomNum> <newMaXCapacity> <newPrice>
+* Format: remove <RoomNum> 
+[Thu Mar 16 10:48:43 2023] Client (fd = 4) requested: add
+[Thu Mar 16 10:48:43 2023] Server response (fd = 4) was: 403: Access denied!
+[Thu Mar 16 10:49:06 2023] Client (fd = 4) requested: remove
+[Thu Mar 16 10:49:06 2023] Server response (fd = 4) was: 403: Access denied!
+[Thu Mar 16 10:49:26 2023] Client (fd = 4) requested: 0
+[Thu Mar 16 10:49:26 2023] Server response (fd = 4) was: 201: User logged out successfully.
+[Thu Mar 16 10:49:42 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 10:49:42 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 10:49:51 2023] Client (fd = 4) requested: 9
+[Thu Mar 16 10:49:51 2023] Server response (fd = 4) was: 
+* Format: add <RoomNum> <maXCapacity> <Price>
+* Format: modify <RoomNum> <newMaXCapacity> <newPrice>
+* Format: remove <RoomNum> 
+[Thu Mar 16 10:49:58 2023] Client (fd = 4) requested: add
+[Thu Mar 16 10:49:58 2023] Server response (fd = 4) was: 104: Successfully added.
+[Thu Mar 16 10:50:03 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 10:50:03 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{User data:  [id] 1 [username] Admin [admin] 1
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{User data:  [id] 2 [username] Morad [admin] 0 [purse] 1000 [phone] 00945692356 [address] Canada
+ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+User data:  [id] 3 [username] Jasem [admin] 0 [purse] 200 [phone] 00125692356 [address] UnitedStates
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+ Room data:  [number] 311 [status] 0 [price] 300 [max capactiy] 3 [reservations] 
+{} 
+
+[Thu Mar 16 10:50:29 2023] Client (fd = 4) requested: 9
+[Thu Mar 16 10:50:29 2023] Server response (fd = 4) was: 
+* Format: add <RoomNum> <maXCapacity> <Price>
+* Format: modify <RoomNum> <newMaXCapacity> <newPrice>
+* Format: remove <RoomNum> 
+[Thu Mar 16 10:50:48 2023] Client (fd = 4) requested: modify
+[Thu Mar 16 10:50:48 2023] Server response (fd = 4) was: 105: Successfully modefied.
+[Thu Mar 16 10:50:50 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 10:50:50 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{User data:  [id] 1 [username] Admin [admin] 1
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{User data:  [id] 2 [username] Morad [admin] 0 [purse] 1000 [phone] 00945692356 [address] Canada
+ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+User data:  [id] 3 [username] Jasem [admin] 0 [purse] 200 [phone] 00125692356 [address] UnitedStates
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+ Room data:  [number] 311 [status] 0 [price] 4 [max capactiy] 311 [reservations] 
+{} 
+
+[Thu Mar 16 10:51:30 2023] Client (fd = 4) requested: 9
+[Thu Mar 16 10:51:30 2023] Server response (fd = 4) was: 
+* Format: add <RoomNum> <maXCapacity> <Price>
+* Format: modify <RoomNum> <newMaXCapacity> <newPrice>
+* Format: remove <RoomNum> 
+[Thu Mar 16 10:53:04 2023] Client (fd = 4) requested: remove
+[Thu Mar 16 10:53:04 2023] Server response (fd = 4) was: 106: Successfully deleted.
+[Thu Mar 16 10:53:08 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 10:53:08 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{User data:  [id] 1 [username] Admin [admin] 1
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{User data:  [id] 2 [username] Morad [admin] 0 [purse] 1000 [phone] 00945692356 [address] Canada
+ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+User data:  [id] 3 [username] Jasem [admin] 0 [purse] 200 [phone] 00125692356 [address] UnitedStates
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+
+[Thu Mar 16 10:53:18 2023] Client on fd 4 disconnected
+[Thu Mar 16 11:03:28 2023] Server is offline.
+[Thu Mar 16 11:03:43 2023] Server is now online.
+[Thu Mar 16 11:03:50 2023] new client connected with fd 4
+[Thu Mar 16 11:04:01 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 11:04:01 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 11:04:55 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 11:04:55 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{User data:  [id] 1 [username] Admin [admin] 1
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{User data:  [id] 2 [username] Morad [admin] 0 [purse] 1000 [phone] 00945692356 [address] Canada
+ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{User data:  [id] 2 [username] Morad [admin] 0 [purse] 1000 [phone] 00945692356 [address] Canada
+ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+User data:  [id] 3 [username] Jasem [admin] 0 [purse] 200 [phone] 00125692356 [address] UnitedStates
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+
+[Thu Mar 16 11:05:55 2023] Client (fd = 4) requested: 8
+[Thu Mar 16 11:05:55 2023] Server response (fd = 4) was: 
+* Format: room <Value> 
+* Help : Value is number of room.
+[Thu Mar 16 11:06:05 2023] Client (fd = 4) requested: room
+[Thu Mar 16 11:06:05 2023] Server response (fd = 4) was: 102: Your reservation was not found
+[Thu Mar 16 11:06:14 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 11:06:14 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{User data:  [id] 1 [username] Admin [admin] 1
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{User data:  [id] 2 [username] Morad [admin] 0 [purse] 1000 [phone] 00945692356 [address] Canada
+ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{User data:  [id] 2 [username] Morad [admin] 0 [purse] 1000 [phone] 00945692356 [address] Canada
+ [number of beds] 1 [reserve date] 27-02-2023 [checkout date] 28-02-2023
+User data:  [id] 3 [username] Jasem [admin] 0 [purse] 200 [phone] 00125692356 [address] UnitedStates
+ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+
+[Thu Mar 16 11:06:19 2023] Client (fd = 4) requested: 0
+[Thu Mar 16 11:06:19 2023] Server response (fd = 4) was: 201: User logged out successfully.
+[Thu Mar 16 11:06:30 2023] Client (fd = 4) requested: signin
+[Thu Mar 16 11:06:30 2023] Server response (fd = 4) was: 230: User logged in.
+[Thu Mar 16 11:06:40 2023] Client (fd = 4) requested: 8
+[Thu Mar 16 11:06:40 2023] Server response (fd = 4) was: 
+* Format: room <Value> 
+* Help : Value is number of room.
+[Thu Mar 16 11:07:25 2023] Client (fd = 4) requested: room
+[Thu Mar 16 11:07:25 2023] Server response (fd = 4) was: 110: Successfully done.
+[Thu Mar 16 11:07:29 2023] Client (fd = 4) requested: 3
+[Thu Mar 16 11:07:29 2023] Server response (fd = 4) was: 
+--------ROOMS_INFO----------
+ Room data:  [number] 101 [status] 0 [price] 100 [max capactiy] 2 [reservations] 
+{} 
+ Room data:  [number] 102 [status] 0 [price] 73 [max capactiy] 3 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 201 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 2 [reserve date] 25-02-2023 [checkout date] 27-02-2023
+} 
+ Room data:  [number] 301 [status] 1 [price] 100 [max capactiy] 2 [reservations] 
+{ [number of beds] 1 [reserve date] 25-02-2023 [checkout date] 26-02-2023
+} 
+
+[Thu Mar 16 11:22:51 2023] Client on fd 4 disconnected
