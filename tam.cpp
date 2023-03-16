@@ -15,21 +15,13 @@ class Myclass{
 int Myclass::count{0};
 
 int main(){
-    
-    
-    time_t tt = time(0);
-    tm *ltm = localtime(&tt);
-
-    char* t = ctime(&tt);
-    cout << ltm->tm_mday << "-" << ltm->tm_mon << "-" << ltm->tm_year + 1900 << endl;
-
-    string date = "27-03-2023";
-    stringstream ss(date);
-    string year, month, day;
-    getline(ss, day, '-');
-    getline(ss, month, '-');
-    getline(ss, year);
-    cout << year << month << day << endl;
-    int a = stoi(year+month+day);
-    cout << a;
+    string day, month, year;
+    string s = "01234567";
+    day = s.substr(0,2);
+    month = s.substr(3,2);
+    year = s.substr(6,4);
+    //cout << "wh/ole " << x.str() << endl;/
+    cout << year  << endl;
+    cout << month << endl;
+    cout << day << endl;
 }
