@@ -153,6 +153,8 @@
 در اینجا از یک مپ به نام fdLoggedInUser استفاده کرده ایم که تشخیص میدهد که کلاینتی که غیر از یوزر و پسورد دستور دیگری وارد کرده
 قبلا login انجام داده یا خیر .
 از مپ fdLastRequest برای این استفاده میشود که ببینیم کلاینتی که پسورد وارد کرده قبلا یوزرنیم وارد کرده است یا خیر .
+این تابع برای بخش رزرواسیون با زدن شماره دستور مورد نظر یک فرمت و یک help نمایش میدهد و 
+پس از وارد کردن دستور شرایط مورد نظر را بررسی کرده و متناسب با آن پیامی نمایش میدهد . 
 
 [![image](https://www.linkpicture.com/q/قعد۲.png)](https://www.linkpicture.com/view.php?img=LPic6413581b6031e1118534929)
 
@@ -203,4 +205,32 @@
 [![image](https://www.linkpicture.com/q/Screen-Shot-2023-03-16-at-11.07.35-PM.png)](https://www.linkpicture.com/view.php?img=LPic64137044785df560896526)
 
 
+
+###  تصویر نتایج نهایی 
+
+[![image](https://www.linkpicture.com/q/Screenshot-994.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
+
+[![image](https://www.linkpicture.com/q/Screenshot-995.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)  
+
+[![image](https://www.linkpicture.com/q/Screenshot-996.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
+
+[![image](https://www.linkpicture.com/q/Screenshot-997.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
+
+[![image](https://www.linkpicture.com/q/Screenshot-998.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
+
+[![image](https://www.linkpicture.com/q/Screenshot-999.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
+
+[![image](https://www.linkpicture.com/q/Screenshot-1000.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
+
+[![image](https://www.linkpicture.com/q/Screenshot-1001.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
+
+[![image](https://www.linkpicture.com/q/Screenshot-1002.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
+
+[![image](https://www.linkpicture.com/q/Screenshot-1003.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
+
+[![image](https://www.linkpicture.com/q/Screenshot-1004.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
+
+[![image](https://www.linkpicture.com/q/Screenshot-1005.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
+
+[![image](https://www.linkpicture.com/q/Screenshot-1006.png)](https://www.linkpicture.com/view.php?img=LPic641378930dda6918621759)
 
