@@ -64,8 +64,6 @@ void Room::removeReservationById(int id, int n){
         }
     }
 }
-                                                                                                        
-
 void Room::addReservation(Reservation* rs){
     capacity -= rs->getNumOfBeds();
     if(capacity == 0)
@@ -78,7 +76,6 @@ bool Room::numMatches(string _num){
         return true;
     }else return false;
 }
-
 string Room::toString(){
     stringstream ss, ss1;
     for(auto res : users){
@@ -89,7 +86,6 @@ string Room::toString(){
             " [reservations] " << "\n{" << ss1.str() << "} \n";
     return ss.str();
 }
-
 string Room::toStringAdmin(){
     stringstream ss, ss1;
     for(auto res : users){
@@ -100,8 +96,6 @@ string Room::toStringAdmin(){
             " [reservations] " << "\n{" << ss1.str() << "} \n";
     return ss.str();
 }
-
-
 void Room::modify(string number,int newMaxCapacity,int newPrice)
 {
     if(numMatches(number))

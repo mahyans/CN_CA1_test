@@ -8,8 +8,6 @@ int main(int argc, char const *argv[]) {
     Server server(inputs);
     signal(SIGINT, signal_callback_handler);
 
-    //uncomment to see server info ("config.json")
-    //server.printServer();
 
     server.run();
 }
