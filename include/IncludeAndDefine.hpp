@@ -63,9 +63,10 @@
 #define LOGOUT "0"
 
 
-#define MAIN_PAGE "1. View user information\n2. View all users\n3. View rooms information\n4. Booking\n5. Canceling\n6. Pass day\n7.Edit information\n8.Leaving room\n9. Rooms\n0. Logout"
+#define MAIN_PAGE "1. View user information\n2. View all users\n3. View rooms information\n4. Booking\n5. Canceling\n6. Pass day\n7. Edit information\n8. Leaving room\n9. Rooms\n0. Logout"
 #define BUFFER_SIZE 102400
 #define LOG_FILE_NAME "/configuration/log.txt"
+#define LOG_FILE_CLIENT "/clientFolder/"
 #define SUCCESSFUL_QUIT "221: Successful Quit."
 #define CANT_OPEN_DATA_CONNECTION "425: Can't open data connection."
 #define SYNTAX_ERROR "501: Syntax error in parameters or arguments."

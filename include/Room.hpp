@@ -15,17 +15,15 @@ class Room {
         bool numMatches(string _number);
         void addReservation(Reservation* newRsv);
         bool hasConflict(Reservation* rsv);
-        int getCapacity();
-        int getMaxCapacity();
+        int getCapacity(){return capacity;};
         std::string getNum(){return number;};
         std::string toString();
         std::string toStringAdmin();
-        int getPrice();
+        int getPrice(){return price;};
         vector <Reservation> users;
         void removeReservationById(int id, int n);
         int findNumOfreserveById(int id);
-        void modify(string number,int newMaxCapacity,int newPrice);
-
+        void editRoom(int newMax, int newPrice){maxCapacity = newMax; price = newPrice;};
     private:
         int status, price, maxCapacity, capacity;
         std::string number;
