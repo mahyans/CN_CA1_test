@@ -86,7 +86,7 @@
 
 تابع findNumOfreserveById تعداد رزروهایی که یک نفر 
 با id داده شده انجام داده را بر میگرداند و 
-این کار را با استفاده از اطلاعات موجود در vector<reservation> users انجام میدهد .
+این کار را با استفاده از اطلاعات موجود در vector< reservation > users انجام میدهد .
 
 تابع removeReservationById رزرو های فرد را با استفاده 
 از id او حذف میکند.
@@ -138,6 +138,11 @@
 [![image](https://www.linkpicture.com/q/accceptthing.png)](https://www.linkpicture.com/view.php?img=LPic641356e401011276453938)
 
 تابع run وظیفه پاسخگویی به درخواست های کاربران را دارد .
+این تابع از فراخوانی سیستمی select و یک حلقه استفاده میکند تا بتواند چند کاربر را همزمان سرویس بدهد .
+در این تابع در صورتی که fd ای که میخواهد پیام ارسال کند 
+همان fd مربوط به 
+پورت cmd_fd باشد یعنی یک کاربر جدید میخواهد به سرور وصل شود .
+
 
 [![image](https://www.linkpicture.com/q/قعد.png)](https://www.linkpicture.com/view.php?img=LPic6413581b6031e1118534929)
 
@@ -145,6 +150,9 @@
 
 تابع commandHandler وظیفه برای اجرای تمام دستورات و نمایش صفحه اصلی استفاده میشود .
 این تابع در ابتدا دستورات را یر حسب تعداد ورودی جدا میکند و مقدار هر ورودی را مشخص میکند و سپس هر کدام از دستورات را نمایش داده و کارهای لازم را انجام میدهد .
+در اینجا از یک مپ به نام fdLoggedInUser استفاده کرده ایم که تشخیص میدهد که کلاینتی که غیر از یوزر و پسورد دستور دیگری وارد کرده
+قبلا login انجام داده یا خیر .
+از مپ fdLastRequest برای این استفاده میشود که ببینیم کلاینتی که پسورد وارد کرده قبلا یوزرنیم وارد کرده است یا خیر .
 
 [![image](https://www.linkpicture.com/q/قعد۲.png)](https://www.linkpicture.com/view.php?img=LPic6413581b6031e1118534929)
 
@@ -170,6 +178,11 @@
 
 [![image](https://www.linkpicture.com/q/convertConfig.png)](https://www.linkpicture.com/view.php?img=LPic64135ba1084ba393989122)
 
+هنگامی که سرور را میبندیم یک سیگنال را فعال سازی میکنیم که تابع exitLog را فراخوانی میکند .
+این تابع پیامی که از این سیگنال دریافت کرده را در log مینویسد و پس از آن برنامه بسته میشود .
+
+[![image](https://www.linkpicture.com/q/latestShit.png)](https://www.linkpicture.com/view.php?img=LPic64136efd0cd2b747535894)
+
 
 ### کلاس network 
 
@@ -180,6 +193,14 @@
 
 [![image](https://www.linkpicture.com/q/Network_2.png)](https://www.linkpicture.com/view.php?img=LPic64135d7ced86b905615975)
 
+
+### فایل Log
+
+بخشی از فایل log را مشاهده میکنید .
+
+[![image](https://www.linkpicture.com/q/Screen-Shot-2023-03-16-at-11.07.28-PM.png)](https://www.linkpicture.com/view.php?img=LPic64137044785df560896526)
+
+[![image](https://www.linkpicture.com/q/Screen-Shot-2023-03-16-at-11.07.35-PM.png)](https://www.linkpicture.com/view.php?img=LPic64137044785df560896526)
 
 
 
