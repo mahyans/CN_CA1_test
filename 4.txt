@@ -1,0 +1,2 @@
+[Mon Mar 20 11:29:49 2023] 430: You need to log out first.
+[Mon Mar 20 11:29:54 2023] 201: User logged out successfully.
