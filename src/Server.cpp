@@ -3,7 +3,7 @@ using namespace std;
 
 char SERVER_ABSOLUTE_PATH[BUFFER_SIZE];
 
-Server::Server(map<string, vector<string>> inputs)
+void Server::setValue(map<string, vector<string>> inputs)
 {
     convertConfig(inputs);
     serverCmdFd = setupServer(cmdChannelPort);
@@ -73,6 +73,9 @@ void Server::printServer()
 
 string Server::handleCommand(string command, string argument, int userFd)
 {
+    stringstream ss;
+    ss << userFd;
+    string S_userFd = ss.str();
     try{
         curr_log += "Client (fd = " + to_string(userFd) + ") requested: " + command;
         writeLog();
@@ -112,34 +115,34 @@ string Server::handleCommand(string command, string argument, int userFd)
         argument1 = argument;
 
     User* currUser = findUserByFd(userFd);
-
     
     if (command == SET_TIME_COMMAND)
     {
         try
         {
             setDate(argument);
-            return SUCCESSFUL;
+            checkExpiredReservation();
+            return S_userFd + SUCCESSFUL;
             curr_log += "Set time to "+ systemDate.toSting() + " (fd = " + to_string(userFd);
         }
         catch (...)
         {
-            return BAD_ARGUMENT;
+            return S_userFd + BAD_ARGUMENT;
         }
     }
 
     else if (command == SIGN_UP_COMMAND)
     {
         if (fdLoggedInUser.find(userFd) != fdLoggedInUser.end())
-            return NEED_TO_LOGOUT;
+            return S_userFd + NEED_TO_LOGOUT;
 
         if (findUserByName(argument1) == NULL)
         {
             fdLastRequest[userFd] = argument1;
-            return ENTER_USER_DATA;
+            return S_userFd + ENTER_USER_DATA;
         }
         else
-            return USER_ALREADY_EXIST;
+            return S_userFd + USER_ALREADY_EXIST;
     }
 
     else if (command == USER_DATA)
@@ -151,24 +154,24 @@ string Server::handleCommand(string command, string argument, int userFd)
                 string username = fdLastRequest[userFd];
                 User newUser(username, argument1, argument2, argument3, argument4);
                 users.push_back(newUser);
-                curr_log += "Signup  successfully (fd = " + to_string(userFd);
+                curr_log += "Signup  successfully (fd = " + to_string(userFd) + " )";
                 writeLog();
-                return SUCCESSFUL_SIGNUP;
+                return S_userFd + SUCCESSFUL_SIGNUP;
                 
             }
             else
-                return BAD_SEQUENCE;
+                return S_userFd + BAD_SEQUENCE;
         }
         catch (...)
         {
-            return BAD_ARGUMENT;
+            return S_userFd + BAD_ARGUMENT;
         }
     }
 
     else if (command == SIGN_IN_COMMAND)
     {
         if (fdLoggedInUser.find(userFd) != fdLoggedInUser.end())
-            return NEED_TO_LOGOUT;
+            return S_userFd + NEED_TO_LOGOUT;
         User *currUser = findUserByName(argument1);
         if (currUser)
         {
@@ -176,16 +179,16 @@ string Server::handleCommand(string command, string argument, int userFd)
             {
                 currUser->updateFd(userFd);
                 fdLoggedInUser[userFd] = argument1;
-                curr_log += "Signin  successfully (fd = " + to_string(userFd);
+                curr_log += "Signin  successfully (fd = " + to_string(userFd) + ")";
                 writeLog();
-                return SUCCESSFUL_LOGIN;
+                return S_userFd + SUCCESSFUL_LOGIN;
             }
             else{
-                return INVALID_USERNAME_PASS;
+                return S_userFd + INVALID_USERNAME_PASS;
             }
         }
         else
-            return INVALID_USERNAME_PASS;
+            return S_userFd + INVALID_USERNAME_PASS;
     }
 
     else if (command == VIEW_USER_INFO)
@@ -203,10 +206,10 @@ string Server::handleCommand(string command, string argument, int userFd)
             {
                 users_data << user.toString();
             }
-            return users_data.str();
+            return S_userFd + users_data.str();
         }
         else
-            return ACCESS_DENIED;
+            return S_userFd + ACCESS_DENIED;
     }
     
     else if (command == VIEW_ROOMS_INFO)
@@ -223,7 +226,7 @@ string Server::handleCommand(string command, string argument, int userFd)
                 ss << room.toStringAdmin();
             }
         }
-        return ss.str();
+        return S_userFd + ss.str();
     }
 
     else if (command == BOOKING)
@@ -231,30 +234,30 @@ string Server::handleCommand(string command, string argument, int userFd)
         stringstream ss;
         ss << "* Format: book <RoomNumber> <NumOfBeds> <CheckinDate> <CheckoutDate>\n"
             << "* Help : RomNumber is number of room, NumOfBeds is number of beds.";
-        return ss.str();
+        return S_userFd + ss.str();
     }
    
     else if (command == BOOK_COMMAND){
-        if(currUser->isAdmin())return ACCESS_DENIED;
+        if(currUser->isAdmin())return S_userFd + ACCESS_DENIED;
         Room* wantedRoom = findRoomByNumber(argument1);
         int num_of_beds = stoi(argument2);
         if(wantedRoom){
             if(currUser->canAfford(wantedRoom->getPrice() * num_of_beds)){
                 try{
                     Reservation newRes(currUser, num_of_beds, argument3, argument4);
-                    if(wantedRoom->hasConflict(&newRes))return ROOM_IS_FULL;
+                    if(wantedRoom->hasConflict(&newRes))return S_userFd + ROOM_IS_FULL;
                     else{
                         wantedRoom->addReservation(&newRes);
                         currUser->reduceMoney(wantedRoom->getPrice() * num_of_beds);
                         currUser->reservs.push_back("[room number]"+wantedRoom->getNum()+" "+newRes.toString());
-                        return SUCCESSFUL;
+                        return S_userFd + SUCCESSFUL;
                     } 
                 }catch(...){
-                    return BAD_ARGUMENT;
+                    return S_userFd + BAD_ARGUMENT;
                 }
             }
-            else return NOT_ENOUGH_MONEY;
-        }else return ROOM_NOT_FOUND;
+            else return S_userFd + NOT_ENOUGH_MONEY;
+        }else return S_userFd + ROOM_NOT_FOUND;
     }
     
     else if (command == CANCELING)
@@ -264,64 +267,58 @@ string Server::handleCommand(string command, string argument, int userFd)
         for(auto res:currUser->reservs) ss << res;
         ss << "\n* Format: cancel <RoomNumber> <Num>\n"
             << "* Help : RomNumber is number of room. Num is numbe of reserved beds that you want to cancel.";
-        return ss.str();
+        return S_userFd + ss.str();
     }
     
     else if (command == CANCLE_COMMAND)
     {
         try{
             Room* wantedRoom = findRoomByNumber(argument1);
-            if(!wantedRoom)return ROOM_NOT_FOUND;
+            if(!wantedRoom)return S_userFd + ROOM_NOT_FOUND;
             int num = stoi(argument2);
-            if(currUser->reservs.size() < num)return RESERVATIONN_NOT_FOUND;
-            if(wantedRoom->findNumOfreserveById(currUser->getId()) < num) return RESERVATIONN_NOT_FOUND; 
+            if(currUser->reservs.size() < num)return S_userFd + RESERVATIONN_NOT_FOUND;
+            if(wantedRoom->findNumOfreserveById(currUser->getId()) < num) return S_userFd + RESERVATIONN_NOT_FOUND; 
             wantedRoom->removeReservationById(currUser->getId(), num);
-            return SUCCESSFUL;
+            return S_userFd + SUCCESSFUL;
         }catch(...){
-            return INVALID_VAL;
+            return S_userFd + INVALID_VAL;
         }
     }
 
     else if (command == PASSDAY)
     {
-        return "\n* Format: passDay <value>\n* Help: value is the number of days.";
+        return S_userFd + "\n* Format: passDay <value>\n* Help: value is the number of days.";
     }
 
     else if (command == PASS_DAY_COMMAND)
     {
         if (fdLoggedInUser.find(userFd) == fdLoggedInUser.end())
-            return SHOULD_LOGIN;
+            return S_userFd + SHOULD_LOGIN;
         try
         {
             if (currUser->isAdmin())
             {
                 systemDate.addDay(stoi(argument));
                 cout << systemDate.toSting() << endl;
-                for(int j = 0; j < rooms.size(); j++){
-                    for(int i = 0; i< rooms[j].users.size(); i++){
-                        cout <<rooms[j].users[i].getEndInterval() << " " << systemDate.toInt() <<endl;
-                        if(rooms[j].users[i].getEndInterval() < systemDate.toInt())
-                            rooms[j].users.erase(rooms[j].users.begin()+i);
-                    }
-                }
-                return SUCCESSFUL;
+                checkExpiredReservation();
+                return S_userFd + SUCCESSFUL;
             }
-            return ACCESS_DENIED;
+            return S_userFd + ACCESS_DENIED;
         }
         catch (...)
         {
-            return BAD_ARGUMENT;
+            return S_userFd + BAD_ARGUMENT;
         }
     }
     
     else if (command == EDIT_INFO)
     {
-        return ENTER_NEW_DATA;
+        return S_userFd + ENTER_NEW_DATA;
     }
 
     else if (command == NEW_DATA){
         currUser->edit(argument1, argument2, argument3);
-        return SUCCESSFUL_CHANGE;
+        return S_userFd + SUCCESSFUL_CHANGE;
     }
 
     else if (command == LEAVING_ROOM)
@@ -329,18 +326,24 @@ string Server::handleCommand(string command, string argument, int userFd)
         stringstream ss;
         ss << "\n* Format: room <Value> \n"
             << "* Help : Value is number of room.";
-        return ss.str();
+        return S_userFd + ss.str();
     }
     else if (command == ROOM_COMMAND)
     {
         try{
             Room* wantedRoom = findRoomByNumber(argument1);
-            if(!wantedRoom)return ROOM_NOT_FOUND;
-            if(wantedRoom->findNumOfreserveById(currUser->getId()) == 0) return RESERVATIONN_NOT_FOUND; 
-            wantedRoom->removeReservationById(currUser->getId(), 1);
-            return SUCCESSFUL;
+            if(!wantedRoom)return S_userFd + ROOM_NOT_FOUND;
+            if(currUser->isAdmin()){
+                wantedRoom->removeAllReservation();
+                return S_userFd + "The room was successfully emptied";
+            }
+            else{
+                if(wantedRoom->findNumOfreserveById(currUser->getId()) == 0) return S_userFd + RESERVATIONN_NOT_FOUND; 
+                wantedRoom->removeReservationById(currUser->getId(), 1);
+                return S_userFd + SUCCESSFUL_LEAVING;
+            }
         }catch(...){
-            return INVALID_VAL;
+            return S_userFd + INVALID_VAL;
         }
     }
     else if (command == EDIT_ROOMS){
@@ -348,34 +351,34 @@ string Server::handleCommand(string command, string argument, int userFd)
         ss << "\n* Format: add <RoomNum> <maXCapacity> <Price>\n"
             << "* Format: modify <RoomNum> <newMaXCapacity> <newPrice>\n"
             << "* Format: remove <RoomNum> ";
-        return ss.str();
+        return S_userFd + ss.str();
     }
     
     else if (command == MODIFY_COMMAND){
-        if (!currUser->isAdmin())return ACCESS_DENIED;
+        if (!currUser->isAdmin())return S_userFd + ACCESS_DENIED;
         Room* wantedRoom = findRoomByNumber(argument1);
-        if(!wantedRoom) return ROOM_NOT_FOUND;
+        if(!wantedRoom) return S_userFd + ROOM_NOT_FOUND;
         wantedRoom->editRoom(stoi(argument2), stoi(argument3));
-        return SUCCESSFUL_MODIFY;
+        return S_userFd + SUCCESSFUL_MODIFY;
     }
 
     else if (command == REMOVE_COMMAND){
-        if (!currUser->isAdmin())return ACCESS_DENIED;
+        if (!currUser->isAdmin())return S_userFd + ACCESS_DENIED;
         for(int i = 0; i < rooms.size(); i++){
             if(rooms[i].numMatches(argument1)){
                 rooms.erase(rooms.begin()+i);
-                return SUCCESSFUL_DELETE;
+                return S_userFd + SUCCESSFUL_DELETE;
             }
         }
     }
 
     else if (command == ADD_COMMAND){
-        if (!currUser->isAdmin())return ACCESS_DENIED;
+        if (!currUser->isAdmin())return S_userFd + ACCESS_DENIED;
         Room* wantedRoom = findRoomByNumber(argument1);
-        if(wantedRoom) return ROOM_ALREADY_EXISTS;
+        if(wantedRoom) return S_userFd + ROOM_ALREADY_EXISTS;
         Room newRoom(argument1, stoi(argument3), stoi(argument2), stoi(argument2));
         rooms.push_back(newRoom);
-        return SUCCESSFUL_ADD;
+        return S_userFd + SUCCESSFUL_ADD;
     }
 
     else if (command == LOGOUT)
@@ -383,12 +386,12 @@ string Server::handleCommand(string command, string argument, int userFd)
         User* currUser = findUserByFd(userFd);
         fdLoggedInUser.erase(userFd);
         currUser->logout();
-        return SUCCESSFUL_LOGOUT;
+        return S_userFd + SUCCESSFUL_LOGOUT;
     }
 
-    return SYNTAX_ERROR;
+    return S_userFd + SYNTAX_ERROR;
     }catch(...){
-        return INVALID_VAL;
+        return S_userFd + INVALID_VAL;
     }
     
 }
@@ -439,6 +442,18 @@ void Server::convertConfig(map<string, vector<string>> inputs)
             index += 1;
         }
         rooms.push_back(newRoom);
+    }
+}
+
+void Server::checkExpiredReservation(){
+    for(int j = 0; j < rooms.size(); j++){
+        for(int i = 0; i< rooms[j].users.size(); i++){
+            if(rooms[j].users[i].getInterval(0) < systemDate.toInt()){
+                
+                rooms[j].users.erase(rooms[j].users.begin()+i);
+
+            }
+        }
     }
 }
 
@@ -522,6 +537,7 @@ void Server::run()
 
                     curr_log += "new client connected with fd " + to_string(new_cmd_socket);
                     writeLog();
+                    updateJsonFiles();
                 }
                 else
                 { // client sending msg
@@ -538,7 +554,7 @@ void Server::run()
 
                         curr_log += "Client on fd " + to_string(i) + " disconnected";
                         writeLog();
-
+                        updateJsonFiles();
                         write(1, "Client disconnected!\n", 22);
                         close(i);
                         
@@ -552,7 +568,7 @@ void Server::run()
                     if (command.back() == '\n')
                         command.pop_back();
                     string response = handleCommand(command, argument, i);
-                    //string response = "ok";
+                    updateJsonFiles();
                     strcpy(buffer, response.c_str());
                     curr_log += "Server response (fd = " + to_string(i) + ") was: " + buffer;
                     writeLog();
@@ -580,8 +596,25 @@ void exitLog(string log)
     logFile.close();
 }
 
-void signal_callback_handler(int signum)
+void Server::updateJsonFiles()
 {
+    stringstream rs, us;
+    for(auto room : rooms){
+        rs << room.toStringAdmin() << endl;
+    }
+    ofstream MyFile("updatedRooms.txt");
+    MyFile << rs.str();
+    MyFile.close();
+
+    for(auto user : users){
+        us << user.toString() << endl;
+    }
+    ofstream MyFile2("updatedUsers.txt");
+    MyFile2 << us.str();
+    MyFile2.close();    
+}
+
+void signal_callback_handler(int signum){
     exitLog("Server is offline.");
     printf("\n");
     exit(signum);

@@ -9,24 +9,25 @@ Room::Room(string number, int price, int maxCapacity, int _capacity)
     status = NOT_FULL;
 }
 
+void Room::removeAllReservation(){
+    for(int i = 0; i < users.size(); i++){
+        users.erase(users.begin()+i);
+    }
+    status = NOT_FULL;
+}
+
 bool Room::hasConflict(Reservation* newRes){
     int start = newRes->getInterval(1);
     int end = newRes->getInterval(0);
     int wanted_beds = newRes->getNumOfBeds();
     int total_beds = 0;
-    //cout << start << " " << end << endl;
     for (auto reserve : users){
         int res1 = reserve.getInterval(1);
         int res2 = reserve.getInterval(0);
-       // cout <<"* " << res1 << " " << res2 << endl;
-       // cout << (res1 <= start & start <= res2);
-        //cout << (res1 <= end & end <= res2);
-       // cout << ((res1 <= start & start <= res2) | (res1 <= end & end <= res2)) << endl;
-        
+       
         bool time_confilct = (res1 <= start & start <= res2) | (res1 <= end & end <= res2);
         if( time_confilct )
             total_beds += reserve.getNumOfBeds();
-        cout << total_beds << endl;
     }
     if( wanted_beds > maxCapacity - total_beds )
             return true;

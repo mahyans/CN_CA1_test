@@ -2,9 +2,9 @@
 #include "../include/Parser.hpp"
 
 using namespace std;
-char SERVER_ABSOLUTE_PATH[BUFFER_SIZE];
+char ABSOLUTE_PATH[BUFFER_SIZE];
 string curr_log = "";
-string log_path = string(SERVER_ABSOLUTE_PATH) + LOG_FILE_NAME;
+
 
 
 int connectServer(int port, string host) {
@@ -57,10 +57,9 @@ int main(int argc, char const *argv[]) {
     bool is_loged_in = false;
 
     cmd_socket = connectServer(cmd_port, host_name);
+    getcwd(ABSOLUTE_PATH, BUFFER_SIZE);
 
     printf("Welcome!\n");
-    getcwd(SERVER_ABSOLUTE_PATH, BUFFER_SIZE);
-    writeLog("client connect\n", log_path +"client.txt");
     while (1) {
         if(is_loged_in)
             printf("\n-----------MAIN_PAGE----------\n%s\n", MAIN_PAGE);
@@ -77,6 +76,12 @@ int main(int argc, char const *argv[]) {
 
         memset(cmdBuff, 0, BUFFER_SIZE);
         recv(cmd_socket, cmdBuff, BUFFER_SIZE, 0);
+        char FD = cmdBuff[0];
+        memmove(cmdBuff, cmdBuff + 1, strlen(cmdBuff));
+        string log_path = string(ABSOLUTE_PATH) + LOG_FILE_CLIENT + FD + ".txt";
+        writeLog(cmdBuff, log_path );
+
+
         printf("\n-----------SERVER_RESPONSE-----------\n%s\n", cmdBuff);
 
         if (!strcmp(cmdBuff, ENTER_USER_DATA)){
@@ -96,6 +101,8 @@ int main(int argc, char const *argv[]) {
             int a = send(cmd_socket, data.c_str(), strlen(data.c_str()), 0);
             memset(cmdBuff, 0, BUFFER_SIZE);
             recv(cmd_socket, cmdBuff, BUFFER_SIZE, 0);
+            FD = cmdBuff[0];
+            memmove(cmdBuff, cmdBuff + 1, strlen(cmdBuff));
             printf("\n-----------SERVER_RESPONSE-----------\n%s\n", cmdBuff);
             continue;
         }
@@ -116,6 +123,8 @@ int main(int argc, char const *argv[]) {
             int a = send(cmd_socket, data.c_str(), strlen(data.c_str()), 0);
             memset(cmdBuff, 0, BUFFER_SIZE);
             recv(cmd_socket, cmdBuff, BUFFER_SIZE, 0);
+            char FD = cmdBuff[0];
+            memmove(cmdBuff, cmdBuff + 1, strlen(cmdBuff));
             printf("\n-----------SERVER_RESPONSE-----------\n%s\n", cmdBuff);
             continue;
         }
@@ -131,7 +140,8 @@ int main(int argc, char const *argv[]) {
         if (!strcmp(cmdBuff, SUCCESSFUL_LOGOUT)){
             is_loged_in = false;
             continue;
-        }       
+        }   
+            
  
     }
    
