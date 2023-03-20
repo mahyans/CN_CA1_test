@@ -23,6 +23,7 @@ class Room {
         vector <Reservation> users;
         void removeReservationById(int id, int n);
         int findNumOfreserveById(int id);
+        void removeAllReservation();
         void editRoom(int newMax, int newPrice){maxCapacity = newMax; price = newPrice;};
     private:
         int status, price, maxCapacity, capacity;

@@ -83,6 +83,17 @@
 
 #define SHOULD_LOGIN "332: Need account for login."
 
+#define USER_COMMAND "user"
+#define PASS_COMMAND "pass"
+#define PWD_COMMAND "pwd"
+#define MKD_COMMAND "mkd"
+#define DELE_COMMAND "dele"
+#define LS_COMMAND "ls"
+#define CWD_COMMAND "cwd"
+#define RENAME_COMMAND "rename"
+#define RETR_COMMAND "retr"
+#define HELP_COMMAND "help"
+#define QUIT_COMMAND "quit"
 
 #define CONFIG_FILE "configuration/config.json"
 #define ROOMS_INFO_FILE "configuration/RoomsInfo.json"

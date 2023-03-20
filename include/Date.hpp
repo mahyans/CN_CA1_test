@@ -24,6 +24,7 @@ class Date{
                 year += 1;
                 month -= 12;
             }
+            total = year*10000 + month*100 + day;
         }
         std::string toSting(){
             stringstream ss;

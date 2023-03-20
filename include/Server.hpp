@@ -9,15 +9,30 @@
 #include <string>
 #include "Date.hpp"
 
+
+
 class Server {
 public:
-    Server(std::map<std::string, std::vector<std::string>> inputs);
+    Server(){};
+    void setValue(std::map<std::string, std::vector<std::string>> inputs);
+    static Server* getInstance(){
+        if(serverPtr == NULL){
+            Server* ptr = new Server();
+            return ptr;
+        }else throw "Just one server at time!\n";
+    }
+    Server(const Server& obj) = delete;
     void printServer();
     int acceptClient(int port);
     std::string handleCommand(std::string command, std::string argument, int userFd);
     void run();
     void setDate(std::string date);
+    void updateJsonFiles();
+    void checkExpiredReservation();
+
 private:
+    static Server* serverPtr;
+    static int num;
     Date systemDate = Date("0-0-0");
     std::string curr_log, log_path;
     std::string hostName;
@@ -27,7 +42,6 @@ private:
     std::vector <std::string> adminFiles;
     std::map<int, std::string> fdLastRequest, fdLoggedInUser; 
     User* loginedUser;
-
     User* findUserByFd(int userFd); 
     User* findUserById(int userId);
     Room* findRoomByNumber(string num);
