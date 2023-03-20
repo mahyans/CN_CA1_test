@@ -29,6 +29,7 @@ ServerSensitivityList = \
 	$(INCLUDE_DIR)/Room.hpp \
 	$(INCLUDE_DIR)/Reservation.hpp \
 	$(INCLUDE_DIR)/IncludeAndDefine.hpp \
+	$(INCLUDE_DIR)/Date.hpp \
 	$(CONFIGURATION_DIR)/RoomsInfo.json \
 	$(CONFIGURATION_DIR)/UsersInfo.json \
 

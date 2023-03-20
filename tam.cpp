@@ -20,8 +20,11 @@ int main(){
     day = s.substr(0,2);
     month = s.substr(3,2);
     year = s.substr(6,4);
+    char a[20] = "hello";
+    cout << a  << endl;
+    
+    memmove(a, a+1, strlen(a));
     //cout << "wh/ole " << x.str() << endl;/
-    cout << year  << endl;
-    cout << month << endl;
-    cout << day << endl;
+    cout << a  << endl;
+    
 }
